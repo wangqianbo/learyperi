@@ -17,7 +17,7 @@ $(function() {
 			resizable : false,
 			closable : false,
 			spacing_open : 0,
-			size : 70
+			size : 100
 		},
 		south : {
 			resizable : false,
@@ -39,7 +39,7 @@ $(function() {
 		"position" : "absolute",
 		"z-index" : 999,
 		"top" : top - 23,
-		"left" : 10
+		"left" : 20
 	});
 	$("#tabs").css({
 		"top" : top - 90
