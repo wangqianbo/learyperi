@@ -29,12 +29,13 @@ public class MenuTreeTag extends SimpleTagSupport {
 
 	@Override
 	public void doTag() throws JspException, IOException {
-		if (menu == null) {
+		if (menu == null) {// 如果标签的menu属性没有值则读取数据库取得菜单树
 			ServletContext servletContext = ((PageContext) this.getJspContext()).getServletContext();
 			WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
 			MenuService menuService = (MenuService) ctx.getBean("menuService");
 			this.setMenu(menuService.findMenu(1));
 		}
+		// 生成第一层菜单
 		List<Menu> menuList = this.getMenu().getChildren();
 		StringBuffer html = new StringBuffer();
 		html.append("<ul class=\"dropdown\">");
@@ -42,6 +43,7 @@ public class MenuTreeTag extends SimpleTagSupport {
 			html.append("<li>");
 			html.append("<a id=\".").append(menuItem.getUrl()).append("\" name=\"topmenu\" href=\"#\">")
 					.append(menuItem.getName()).append("</a>");
+			// 递归生成菜单
 			html.append(this.writeHTML(menuItem));
 			html.append("</li>");
 		}
