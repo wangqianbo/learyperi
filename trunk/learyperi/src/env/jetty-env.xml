@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
+	<New id="DataSource" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>jdbc/ds</Arg>
+		<Arg>
+			<New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+				<Set name="driverClass">com.mysql.jdbc.Driver</Set>
+				<Set name="jdbcUrl"><![CDATA[jdbc:mysql://127.0.0.1:3306/learyperi?useUnicode=true&characterEncoding=UTF-8]]></Set>
+				<Set name="user">learyperi</Set>
+				<Set name="password">learyperi</Set>
+				<Set name="idleConnectionTestPeriod">3600</Set>
+			</New>
+		</Arg>
+	</New>
+</Configure>
