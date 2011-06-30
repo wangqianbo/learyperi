@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-Strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="res/jquery/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="res/jquery/jquery-ui-1.8.13.min.js"></script>
+<script type="text/javascript" src="res/jquery/jquery.layout.min.js"></script>
+<script type="text/javascript" src="res/js/index.js"></script>
+<link rel="stylesheet" type="text/css" href="res/jquery/jquery-ui-1.8.13.css" />
+<link rel="stylesheet" type="text/css" href="res/css/index.css" />
+<title>learyperi</title>
+</head>
+<body>
+	<!-- 菜单 -->
+	<div id="topmenu"><#include "/page/include/topMenu.xhtml"></div>
+	<!-- 顶部 -->
+	<div class="ui-layout-north">
+		<div><#include "/page/include/header.xhtml"></div>
+	</div>
+	<!-- 左侧 -->
+	<div class="ui-layout-west"><#include "/page/include/leftPanel.xhtml"></div>
+	<!-- 右侧  -->
+	<div class="ui-layout-east"><#include "/page/include/rightPanel.xhtml"></div>
+	<!-- 中央 -->
+	<div class="ui-layout-center"><#include "/page/include/centerPanel.xhtml"></div>
+	<!-- 底部 -->
+	<div class="ui-layout-south"><#include "/page/include/footer.xhtml"></div>
+</body>
+</html>
