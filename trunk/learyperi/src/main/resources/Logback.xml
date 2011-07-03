@@ -15,7 +15,7 @@
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<File>${user.dir}/logs/learyperi.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<FileNamePattern>sample.log.%i.bak</FileNamePattern>
+			<FileNamePattern>learyperi.log.%i.bak</FileNamePattern>
 			<MinIndex>1</MinIndex>
 			<MaxIndex>10</MaxIndex>
 		</rollingPolicy>
