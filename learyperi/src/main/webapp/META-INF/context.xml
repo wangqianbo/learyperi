@@ -1,30 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Context path="/learyperi">
-	<Resource name="jdbc/ds" auth="Container" type="javax.sql.DataSource" />
-	<ResourceParams name="jdbc/ds">
-		<Parameter>
-			<name>url</name>
-			<value>jdbc:mysql://localhost:3306/test?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8</value>
-		</Parameter>
-		<Parameter>
-			<name>username</name>
-			<value>test</value>
-		</Parameter>
-		<Parameter>
-			<name>password</name>
-			<value>123456</value>
-		</Parameter>
-		<Parameter>
-			<name>driverClassName</name>
-			<value>com.mysql.jdbc.Driver</value>
-		</Parameter>
-		<Parameter>
-			<name>maxWait</name>
-			<value>3600</value>
-		</Parameter>
-		<Parameter>
-			<name>maxIdle</name>
-			<value>60</value>
-		</Parameter>
-	</ResourceParams>
+	<Resource name="jdbc/ds" auth="Container" type="javax.sql.DataSource"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/test?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8"
+		username="test" password="123456" maxActive="10" maxIdle="30" maxWait="10000"
+		removeAbandoned="true" removeAbandonedTimeout="300" logAbandoned="true" />
 </Context>
