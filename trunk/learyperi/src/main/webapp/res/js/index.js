@@ -38,7 +38,7 @@ $(function() {
 	$("#topmenu").css({
 		"position" : "absolute",
 		"z-index" : 999,
-		"top" : top - 23,
+		"top" : top,
 		"left" : 20
 	});
 	$("#tabs").css({
