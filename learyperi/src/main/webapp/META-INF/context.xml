@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context path="/learyperi" debug="5" reloadable="true">
+    <Resource name="jdbc/ds" 
+        type="javax.sql.DataSource" 
+        driverClassName="com.mysql.jdbc.Driver" 
+        password="learyperi" 
+        maxIdle="10" 
+        maxWait="5000" 
+        username="learyperi" 
+        url="jdbc:mysql://localhost:3306/learyperi?useUnicode=true&characterEncoding=UTF-8" 
+        maxActive="4"/>
+</Context>
