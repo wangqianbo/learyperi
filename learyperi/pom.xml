@@ -124,6 +124,13 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>learyperi</id>
+			<name>learyperi</name>
+			<url>file://${basedir}/target/deploy</url>
+		</repository>
+	</distributionManagement>
 	<build>
 		<finalName>learyperi</finalName>
 		<plugins>
