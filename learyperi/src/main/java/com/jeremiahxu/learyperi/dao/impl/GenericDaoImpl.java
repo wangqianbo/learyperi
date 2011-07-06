@@ -50,6 +50,11 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
 		return em.createQuery(jpql.toString()).getResultList();
 	}
 
+	@Override
+	public void flush() {
+		em.flush();
+	}
+
 	public EntityManager getEm() {
 		return em;
 	}
