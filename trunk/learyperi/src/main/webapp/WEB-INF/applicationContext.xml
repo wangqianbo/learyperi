@@ -10,7 +10,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<aop:aspectj-autoproxy/>
 	<!-- 需要spring扫描的包 -->
-	<context:component-scan base-package="com" />
+	<context:component-scan base-package="com.jeremiahxu.learyperi" />
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
    			<value>java:comp/env/jdbc/ds</value>
