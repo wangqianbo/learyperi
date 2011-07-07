@@ -28,12 +28,6 @@
 		<property name="namePath">
 			<value>/菜单1/</value>
 		</property>
-		<property name="children">
-			<list>
-				<ref bean="menu11" />
-				<ref bean="menu12" />
-			</list>
-		</property>
 	</bean>
 	<bean id="menu11" class="com.jeremiahxu.learyperi.menu.pojo.Menu">
 		<property name="code">
