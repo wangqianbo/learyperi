@@ -6,23 +6,27 @@
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
             http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
-	<!--启动spring注解功能,指定transaction manager-->
+	<!--启动spring注解功能,指定transaction manager -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
-	<aop:aspectj-autoproxy/>
+	<aop:aspectj-autoproxy />
 	<!-- 需要spring扫描的包 -->
 	<context:component-scan base-package="com.jeremiahxu.learyperi" />
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
-   			<value>java:comp/env/jdbc/ds</value>
+			<value>java:comp/env/jdbc/ds</value>
 		</property>
 	</bean>
 	<!-- 设定transactionManager -->
- 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	<!-- 配置entityManagerFactory -->
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
-    </bean>
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitName">
+			<value>learyperi</value>
+		</property>
+	</bean>
 
 </beans>
