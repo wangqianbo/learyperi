@@ -15,4 +15,17 @@
 			<property name="hibernate.max_fetch_depth" value="3" />
 		</properties>
 	</persistence-unit>
+	<persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<!-- 输出SQL，开发时使用，发布时应改为false。 -->
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider" />
+			<property name="hibernate.cache.use_query_cache" value="true" />
+			<property name="hibernate.max_fetch_depth" value="3" />
+		</properties>
+	</persistence-unit>
 </persistence>
