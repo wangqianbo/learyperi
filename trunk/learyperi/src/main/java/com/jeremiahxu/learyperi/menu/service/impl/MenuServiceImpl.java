@@ -22,6 +22,25 @@ public class MenuServiceImpl implements MenuService {
 	@Resource(name = "dao")
 	private GenericDao<Menu, Integer> menuDao;
 
+	private void computePathAndLevel(Menu menu) {
+		String idPath = menu.getId() + "/";
+		String namePath = menu.getName() + "/";
+		int level = menu.getLevel();
+		Menu parent = menu.getParent();
+		if (parent == null) {
+			idPath = "/" + idPath;
+			namePath = "/" + namePath;
+		} else {
+			parent = this.findMenu(parent.getId());
+			idPath = parent.getIdPath() + idPath;
+			namePath = parent.getNamePath() + namePath;
+			level = parent.getLevel() + 1;
+		}
+		menu.setIdPath(idPath);
+		menu.setNamePath(namePath);
+		menu.setLevel(level);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -32,6 +51,8 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public void createMenu(Menu menu) {
 		this.getMenuDao().save(menu);
+		this.computePathAndLevel(menu);
+		this.getMenuDao().update(menu);
 	}
 
 	/*
@@ -56,6 +77,7 @@ public class MenuServiceImpl implements MenuService {
 	 */
 	@Override
 	public void updateMenu(Menu menu) {
+		this.computePathAndLevel(menu);
 		this.getMenuDao().update(menu);
 	}
 
