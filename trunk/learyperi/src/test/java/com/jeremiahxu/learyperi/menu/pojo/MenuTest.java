@@ -1,5 +1,7 @@
 package com.jeremiahxu.learyperi.menu.pojo;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Assert;
@@ -48,12 +50,69 @@ public class MenuTest extends AbstractTransactionalDataSourceSpringContextTests 
 
 	@Test
 	@DirtiesContext
-	@Rollback(value = true)
 	@Transactional
-	public void menuSavedAndGetId() {
+	@Rollback(value = true)
+	public void menuSaveThenIdIsGreaterThanZero() {
 		dao.save(menu1);
 		int id = menu1.getId();
 		Assert.assertTrue(id > 0);
+	}
+
+	@Test
+	@DirtiesContext
+	@Transactional
+	@Rollback(value = true)
+	public void threeMenuSaveThenParentIdIsCorrect() {
+		menu11.setParent(menu1);
+		menu12.setParent(menu1);
+		dao.save(menu1);
+		dao.save(menu11);
+		dao.save(menu12);
+		Assert.assertTrue("子菜单保存后的父节点不正确", menu11.getParent().getId() == menu1.getId());
+		Assert.assertTrue("子菜单保存后的父节点不正确", menu12.getParent().getId() == menu1.getId());
+	}
+
+	@Test
+	@DirtiesContext
+	@Transactional
+	@Rollback(value = true)
+	public void menuSaveAndDeleteThenNotFound() {
+		dao.save(menu1);
+		int id = menu1.getId();
+		dao.delete(menu1);
+		Menu menu = dao.findById(Menu.class, id);
+		Assert.assertNull("菜单项未被删除", menu);
+	}
+
+	@Test
+	@DirtiesContext
+	@Transactional
+	@Rollback(value = true)
+	public void menuUpdate() {
+		dao.save(menu1);
+		int id = menu1.getId();
+		menu1.setCode("codeA");
+		menu1.setIdPath("idpathA");
+		menu1.setImagePath("imagePathA");
+		menu1.setLevel((short) 2);
+		menu1.setName("nameA");
+		menu1.setNamePath("namePathA");
+		menu1.setUrl("urlA");
+		dao.update(menu1);
+		Menu menu = dao.findById(Menu.class, id);
+		Assert.assertTrue("更新失败", menu.equals(menu1));
+	}
+
+	@Test
+	@DirtiesContext
+	@Transactional
+	@Rollback(value = true)
+	public void threeMenuSaveThenFindThreeMenu() {
+		dao.save(menu1);
+		dao.save(menu11);
+		dao.save(menu12);
+		List<Menu> rs = dao.findAll(Menu.class);
+		Assert.assertTrue("添加的记录条数和查询出的记录条数不一致", rs.size() == 3);
 	}
 
 }
