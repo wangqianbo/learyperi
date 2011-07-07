@@ -34,22 +34,22 @@ public class Menu implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column(name = "MI_CODE", length = 20, nullable = false, unique = true)
-	private String code;// 代码
+	private String code = "";// 代码
 	@Column(name = "MI_NAME", length = 40, nullable = false)
-	private String name;// 名称
+	private String name = "";// 名称
 	@Column(name = "MI_LEVEL", length = 2, nullable = false)
-	private short level;// 层级
+	private int level = 0;// 层级
 	@Column(name = "MI_URL", length = 250, nullable = false)
-	private String url;// 要访问的URL
+	private String url = "";// 要访问的URL
 	@Column(name = "MI_IMG_PATH", length = 250, nullable = false)
-	private String imagePath;// 菜单上显示的图片
+	private String imagePath = "";// 菜单上显示的图片
 	@Column(name = "MI_ID_PATH", length = 250, nullable = false)
-	private String idPath;// id的全路径
+	private String idPath = "";// id的全路径
 	@Column(name = "MI_NAME_PATH", length = 250, nullable = false)
-	private String namePath;// 名称的全路径
-	@OneToMany(cascade = CascadeType.REMOVE, targetEntity = Menu.class, mappedBy = "parent")
+	private String namePath = "";// 名称的全路径
+	@OneToMany(cascade = { CascadeType.REMOVE, CascadeType.REFRESH }, targetEntity = Menu.class, mappedBy = "parent")
 	private List<Menu> children = new ArrayList<Menu>();// 子节点列表
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "MI_PARENT_ID")
 	private Menu parent;// 父节点
 
@@ -77,11 +77,11 @@ public class Menu implements Serializable {
 		this.name = name;
 	}
 
-	public short getLevel() {
+	public int getLevel() {
 		return level;
 	}
 
-	public void setLevel(short level) {
+	public void setLevel(int level) {
 		this.level = level;
 	}
 
