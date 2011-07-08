@@ -108,7 +108,7 @@ public class MenuTest extends AbstractTransactionalJUnit4SpringContextTests {
 		dao.save(menu1);
 		dao.save(menu2);
 		dao.save(menu3);
-		List<Menu> rs = dao.findAll(Menu.class);
+		List<Menu> rs = dao.queryByJPQL("select m from Menu m");
 		Assert.assertTrue("添加的记录条数和查询出的记录条数不一致", rs.size() == 3);
 	}
 

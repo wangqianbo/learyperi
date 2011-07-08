@@ -1,7 +1,5 @@
 package com.jeremiahxu.learyperi.menu.service;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.junit.Assert;
@@ -92,20 +90,6 @@ public class MenuServiceImplTest extends AbstractTransactionalJUnit4SpringContex
 		Assert.assertTrue("更新失败", menuComp.getName().equals(menuUpdate.getName()));
 		Assert.assertTrue("更新失败", menuComp.getImagePath().equals(menuUpdate.getImagePath()));
 		Assert.assertTrue("更新失败", menuComp.getUrl().equals(menuUpdate.getUrl()));
-	}
-
-	@Test
-	@Transactional
-	@Rollback(value = true)
-	public void createThreeMenuAndFindThree() {
-		Menu menu = MenuBuilder.aMenu().withCode("code1").withName("菜单1").withImagePath("imagepath1").withUrl("url1").build();
-		menuService.createMenu(menu);
-		menu = MenuBuilder.aMenu().withCode("code2").withName("菜单2").withImagePath("imagepath2").withUrl("url2").build();
-		menuService.createMenu(menu);
-		menu = MenuBuilder.aMenu().withCode("code3").withName("菜单3").withImagePath("imagepath3").withUrl("url3").build();
-		menuService.createMenu(menu);
-		List<Menu> rs = menuService.findAllMenu();
-		Assert.assertTrue("添加的记录数和查询出来的记录数不一致", rs.size() == 3);
 	}
 
 }
