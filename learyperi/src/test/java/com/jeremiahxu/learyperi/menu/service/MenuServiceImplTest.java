@@ -7,9 +7,9 @@ import javax.annotation.Resource;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +22,7 @@ import com.jeremiahxu.learyperi.menu.pojo.Menu;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
-public class MenuServiceImplTest extends AbstractTransactionalDataSourceSpringContextTests {
+public class MenuServiceImplTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Resource(name = "menuService")
 	private MenuService menuService;
 
