@@ -7,9 +7,11 @@
 <script type="text/javascript" src="res/jquery/jquery.dropdown.js"></script>
 <script type="text/javascript" src="res/jquery/jquery.dropdownPlain.js"></script>
 <script type="text/javascript" src="res/js/panel/topMenu.js"></script>
-<link rel="stylesheet" type="text/css" href="res/css/topmenu.css" />
+<link rel="stylesheet" type="text/css" href="res/css/panel/topmenu.css" />
 </head>
 <body>
-<@menu.menutree />
+<div id="topmenu">
+	<@menu.menutree topMenuClass="dropdown" subMenuClass="sub_menu" />
+</div>
 </body>
 </html>
