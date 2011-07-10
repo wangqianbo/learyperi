@@ -42,7 +42,7 @@ public class MenuBuilder {
 		return this;
 	}
 
-	public MenuBuilder with(short level) {
+	public MenuBuilder withLevel(int level) {
 		this.menu.setLevel(level);
 		return this;
 	}

@@ -78,11 +78,11 @@ public class MenuTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Rollback(value = true)
 	public void menuUpdate() {
 		Menu menu = MenuBuilder.aMenu().withCode("code1").withName("菜单1").withImagePath("imagepath1").withUrl("url1")
-				.with((short) 1).withIdPath("/1/").withNamePath("/菜单1/").build();
+				.withLevel(1).withIdPath("/1/").withNamePath("/菜单1/").build();
 		dao.save(menu);
 		int id = menu.getId();
 		Menu menuUpdate = MenuBuilder.aMenu().withCode("code2").withName("菜单2").withImagePath("imagepath2").withUrl("url2")
-				.with((short) 2).withIdPath("/2/").withNamePath("/菜单2/").with(id).build();
+				.withLevel(2).withIdPath("/2/").withNamePath("/菜单2/").with(id).build();
 		dao.update(menuUpdate);
 		Menu menuComp = dao.findById(Menu.class, id);
 		Assert.assertTrue("更新失败", menuComp.getCode().equals(menuUpdate.getCode()));
@@ -100,11 +100,11 @@ public class MenuTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Rollback(value = true)
 	public void threeMenuSaveThenFindThreeMenu() {
 		Menu menu1 = MenuBuilder.aMenu().withCode("code1").withName("菜单1").withImagePath("imagepath1").withUrl("url1")
-				.with((short) 1).withIdPath("/1/").withNamePath("/菜单1/").build();
+				.withLevel(1).withIdPath("/1/").withNamePath("/菜单1/").build();
 		Menu menu2 = MenuBuilder.aMenu().withCode("code2").withName("菜单2").withImagePath("imagepath2").withUrl("url2")
-				.with((short) 1).withIdPath("/2/").withNamePath("/菜单2/").build();
+				.withLevel(1).withIdPath("/2/").withNamePath("/菜单2/").build();
 		Menu menu3 = MenuBuilder.aMenu().withCode("code3").withName("菜单3").withImagePath("imagepath3").withUrl("url3")
-				.with((short) 1).withIdPath("/3/").withNamePath("/菜单3/").build();
+				.withLevel(1).withIdPath("/3/").withNamePath("/菜单3/").build();
 		dao.save(menu1);
 		dao.save(menu2);
 		dao.save(menu3);
