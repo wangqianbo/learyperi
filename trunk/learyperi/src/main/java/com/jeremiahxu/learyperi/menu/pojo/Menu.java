@@ -1,19 +1,18 @@
 package com.jeremiahxu.learyperi.menu.pojo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -24,8 +23,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * @author Jeremiah Xu
  * 
  */
-@Entity
-@Table(name = "T_MENU_INFO")
+@Entity(name = "T_MENU_INFO")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Menu implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -47,9 +45,9 @@ public class Menu implements Serializable {
 	private String idPath = "";// id的全路径
 	@Column(name = "MI_NAME_PATH", length = 250, nullable = false)
 	private String namePath = "";// 名称的全路径
-	@OneToMany(cascade = { CascadeType.REMOVE, CascadeType.REFRESH }, targetEntity = Menu.class, mappedBy = "parent")
-	private List<Menu> children = new ArrayList<Menu>();// 子节点列表
-	@ManyToOne(cascade = CascadeType.REFRESH)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Menu.class, mappedBy = "parent")
+	private List<Menu> children;// 子节点列表
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "MI_PARENT_ID")
 	private Menu parent;// 父节点
 
