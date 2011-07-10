@@ -43,11 +43,8 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> findAll(Class<T> clazz) {
-		StringBuffer jpql = new StringBuffer("from ");
-		jpql.append(clazz.getName());
-		jpql.append(" obj");
-		return em.createQuery(jpql.toString()).getResultList();
+	public List<T> queryByJPQL(String jpql) {
+		return em.createQuery(jpql).getResultList();
 	}
 
 	@Override
