@@ -1,7 +1,5 @@
 package com.jeremiahxu.learyperi.menu.service.impl;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +20,11 @@ public class MenuServiceImpl implements MenuService {
 	@Resource(name = "dao")
 	private GenericDao<Menu, Integer> menuDao;
 
+	/**
+	 * 计算idpath、namepath和level属性。
+	 * 
+	 * @param menu
+	 */
 	private void computePathAndLevel(Menu menu) {
 		String idPath = menu.getId() + "/";
 		String namePath = menu.getName() + "/";
@@ -79,16 +82,6 @@ public class MenuServiceImpl implements MenuService {
 	public void updateMenu(Menu menu) {
 		this.computePathAndLevel(menu);
 		this.getMenuDao().update(menu);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.jeremiahxu.learyperi.menu.service.MenuService#findAllMenu()
-	 */
-	@Override
-	public List<Menu> findAllMenu() {
-		return this.getMenuDao().findAll(Menu.class);
 	}
 
 	/*
