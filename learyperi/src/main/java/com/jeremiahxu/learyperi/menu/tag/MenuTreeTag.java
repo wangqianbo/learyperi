@@ -26,6 +26,8 @@ public class MenuTreeTag extends SimpleTagSupport {
 	private static final long serialVersionUID = 1L;
 	protected Logger log = LoggerFactory.getLogger(this.getClass());
 	private Menu menu;
+	private String topMenuClass = "dropdown";
+	private String subMenuClass = "sub_menu";
 
 	@Override
 	public void doTag() throws JspException, IOException {
@@ -38,11 +40,11 @@ public class MenuTreeTag extends SimpleTagSupport {
 		// 生成第一层菜单
 		List<Menu> menuList = this.getMenu().getChildren();
 		StringBuffer html = new StringBuffer();
-		html.append("<ul class=\"dropdown\">");
+		html.append("<ul class=\"").append(this.getTopMenuClass()).append("\">");
 		for (Menu menuItem : menuList) {
 			html.append("<li>");
-			html.append("<a id=\".").append(menuItem.getUrl()).append("\" name=\"topmenu\" href=\"#\">")
-					.append(menuItem.getName()).append("</a>");
+			html.append("<a id=\"").append(menuItem.getId()).append("\" name=\".").append(menuItem.getUrl())
+					.append("\" href=\"#\">").append(menuItem.getName()).append("</a>");
 			// 递归生成菜单
 			html.append(this.writeHTML(menuItem));
 			html.append("</li>");
@@ -67,11 +69,11 @@ public class MenuTreeTag extends SimpleTagSupport {
 			return "";
 		}
 		StringBuffer html = new StringBuffer();
-		html.append("<ul class=\"sub_menu\">");
+		html.append("<ul class=\"").append(this.getSubMenuClass()).append("\">");
 		for (Menu menuItem : menuList) {
 			html.append("<li>");
-			html.append("<a id=\".").append(menuItem.getUrl()).append("\" name=\"topmenu\" href=\"#\">")
-					.append(menuItem.getName()).append("</a>");
+			html.append("<a id=\"").append(menuItem.getId()).append("\" name=\".").append(menuItem.getUrl())
+					.append("\" href=\"#\">").append(menuItem.getName()).append("</a>");
 			html.append(this.writeHTML(menuItem));
 			html.append("</li>");
 		}
@@ -85,6 +87,22 @@ public class MenuTreeTag extends SimpleTagSupport {
 
 	public void setMenu(Menu menu) {
 		this.menu = menu;
+	}
+
+	public String getTopMenuClass() {
+		return topMenuClass;
+	}
+
+	public void setTopMenuClass(String topMenuClass) {
+		this.topMenuClass = topMenuClass;
+	}
+
+	public String getSubMenuClass() {
+		return subMenuClass;
+	}
+
+	public void setSubMenuClass(String subMenuClass) {
+		this.subMenuClass = subMenuClass;
 	}
 
 }
