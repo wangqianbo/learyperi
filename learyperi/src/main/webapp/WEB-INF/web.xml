@@ -4,11 +4,6 @@
 
 <web-app>
 	<display-name>learyperi</display-name>
-	<!--Spring默认刷新Log4j配置文件的间隔，单位为毫秒。 -->
-	<context-param>
-		<param-name>log4jRefreshInterval</param-name>
-		<param-value>60000</param-value>
-	</context-param>
 	<!-- struts分发过滤器配置 -->
 	<filter>
 		<filter-name>struts2</filter-name>
@@ -16,7 +11,7 @@
 		<!-- struts进行扫描的包 -->
 		<init-param>
 			<param-name>actionPackages</param-name>
-			<param-value>com</param-value>
+			<param-value>com.jeremiahxu.learyperi</param-value>
 		</init-param>
 	</filter>
 	<!-- 允许延时加载数据 -->
