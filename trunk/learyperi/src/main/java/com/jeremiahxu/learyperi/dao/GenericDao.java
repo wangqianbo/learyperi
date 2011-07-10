@@ -18,7 +18,7 @@ public interface GenericDao<T, ID extends Serializable> {
 
 	public T findById(Class<T> clazz, ID id);
 
-	public List<T> findAll(Class<T> clazz);
+	public List<T> queryByJPQL(String jpql);
 
 	public void flush();
 }
