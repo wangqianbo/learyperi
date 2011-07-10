@@ -1,7 +1,5 @@
 package com.jeremiahxu.learyperi.menu.service;
 
-import java.util.List;
-
 import com.jeremiahxu.learyperi.menu.pojo.Menu;
 
 /**
@@ -32,11 +30,6 @@ public interface MenuService {
 	 * @param menu
 	 */
 	public void updateMenu(Menu menu);
-
-	/**
-	 * 查询出所有菜单项。
-	 */
-	public List<Menu> findAllMenu();
 
 	/**
 	 * 根据id取得菜单项。
