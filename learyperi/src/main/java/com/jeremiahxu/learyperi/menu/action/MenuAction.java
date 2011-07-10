@@ -1,14 +1,11 @@
 package com.jeremiahxu.learyperi.menu.action;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.apache.struts2.config.Action;
 import org.apache.struts2.config.ParentPackage;
 import org.apache.struts2.config.Result;
 import org.apache.struts2.config.Results;
-import org.apache.struts2.dispatcher.ServletRedirectResult;
 import org.apache.struts2.views.freemarker.FreemarkerResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +14,7 @@ import org.springframework.stereotype.Controller;
 
 import com.jeremiahxu.learyperi.menu.pojo.Menu;
 import com.jeremiahxu.learyperi.menu.service.MenuService;
+import com.opensymphony.xwork2.ActionChainResult;
 
 /**
  * menu action
@@ -28,17 +26,17 @@ import com.jeremiahxu.learyperi.menu.service.MenuService;
 @ParentPackage(value = "struts-learyperi")
 @Action(namespace = "/page/menu", name = "menu")
 @Results({ @Result(name = "list", type = FreemarkerResult.class, value = "/page/menu/menuList.xhtml"),
-		@Result(name = "create", type = ServletRedirectResult.class, value = "menu!listMenu.action"),
-		@Result(name = "update", type = ServletRedirectResult.class, value = "menu!listMenu.action"),
-		@Result(name = "delete", type = ServletRedirectResult.class, value = "menu!listMenu.action"),
+		@Result(name = "create", type = ActionChainResult.class, value = "menu!listMenu.action"),
+		@Result(name = "update", type = ActionChainResult.class, value = "menu!listMenu.action"),
+		@Result(name = "delete", type = ActionChainResult.class, value = "menu!listMenu.action"),
 		@Result(name = "show", type = FreemarkerResult.class, value = "/page/menu/menuDetail.xhtml"),
 		@Result(name = "toEdit", type = FreemarkerResult.class, value = "/page/menu/menuEdit.xhtml") })
 @Scope("request")
 public class MenuAction {
 	protected Logger log = LoggerFactory.getLogger(this.getClass());
-	@Resource
+	@Resource(name = "menuService")
 	private MenuService menuService;
-	private List<Menu> menus;
+	private String message;
 	private Menu menu;
 
 	/**
@@ -48,7 +46,6 @@ public class MenuAction {
 	 * @throws Exception
 	 */
 	public String listMenu() throws Exception {
-		this.setMenus(this.getMenuService().findAllMenu());
 		log.info("list menu.");
 		return "list";
 	}
@@ -121,12 +118,12 @@ public class MenuAction {
 		this.menuService = menuService;
 	}
 
-	public List<Menu> getMenus() {
-		return menus;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setMenus(List<Menu> menus) {
-		this.menus = menus;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public Menu getMenu() {
