@@ -7,8 +7,6 @@
 	<package name="struts-learyperi" extends="struts-default" namespace="/common">
 		<global-results>
 			<result type="freemarker" name="error">/page/common/error.xhtml</result>
-			<result type="freemarker" name="warn">/page/common/warn.xhtml</result>
-			<result type="freemarker" name="messsage">/page/common/message.xhtml</result>
 		</global-results>
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="java.lang.Throwable" />

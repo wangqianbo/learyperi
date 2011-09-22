@@ -26,8 +26,8 @@ public class MenuTreeTag extends SimpleTagSupport {
 	private static final long serialVersionUID = 1L;
 	protected Logger log = LoggerFactory.getLogger(this.getClass());
 	private Menu menu;
-	private String topMenuClass = "dropdown";
-	private String subMenuClass = "sub_menu";
+	private String topMenuClass;// 顶层菜单class
+	private String subMenuClass;// 各级子菜单class
 
 	@Override
 	public void doTag() throws JspException, IOException {
@@ -35,12 +35,16 @@ public class MenuTreeTag extends SimpleTagSupport {
 			ServletContext servletContext = ((PageContext) this.getJspContext()).getServletContext();
 			WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
 			MenuService menuService = (MenuService) ctx.getBean("menuService");
-			this.setMenu(menuService.findMenu(1));
+			this.setMenu(menuService.findRoot());
 		}
 		// 生成第一层菜单
 		List<Menu> menuList = this.getMenu().getChildren();
 		StringBuffer html = new StringBuffer();
-		html.append("<ul class=\"").append(this.getTopMenuClass()).append("\">");
+		if (this.getTopMenuClass() == null) {
+			html.append("<ul>");
+		} else {
+			html.append("<ul class=\"").append(this.getTopMenuClass()).append("\">");
+		}
 		for (Menu menuItem : menuList) {
 			html.append("<li>");
 			html.append("<a id=\"").append(menuItem.getId()).append("\" name=\".").append(menuItem.getUrl())
@@ -69,7 +73,11 @@ public class MenuTreeTag extends SimpleTagSupport {
 			return "";
 		}
 		StringBuffer html = new StringBuffer();
-		html.append("<ul class=\"").append(this.getSubMenuClass()).append("\">");
+		if (this.getSubMenuClass() == null) {
+			html.append("<ul>");
+		} else {
+			html.append("<ul class=\"").append(this.getSubMenuClass()).append("\">");
+		}
 		for (Menu menuItem : menuList) {
 			html.append("<li>");
 			html.append("<a id=\"").append(menuItem.getId()).append("\" name=\".").append(menuItem.getUrl())
@@ -104,5 +112,4 @@ public class MenuTreeTag extends SimpleTagSupport {
 	public void setSubMenuClass(String subMenuClass) {
 		this.subMenuClass = subMenuClass;
 	}
-
 }

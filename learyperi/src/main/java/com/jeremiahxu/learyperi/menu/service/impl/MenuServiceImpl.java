@@ -1,8 +1,11 @@
 package com.jeremiahxu.learyperi.menu.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jeremiahxu.learyperi.dao.GenericDao;
 import com.jeremiahxu.learyperi.menu.pojo.Menu;
@@ -52,6 +55,7 @@ public class MenuServiceImpl implements MenuService {
 	 * .learyperi.menu.pojo.Menu)
 	 */
 	@Override
+	@Transactional
 	public void createMenu(Menu menu) {
 		this.getMenuDao().save(menu);
 		this.computePathAndLevel(menu);
@@ -66,6 +70,7 @@ public class MenuServiceImpl implements MenuService {
 	 * .learyperi.menu.pojo.Menu)
 	 */
 	@Override
+	@Transactional
 	public void deleteMenu(Menu menu) {
 		Menu menuDel = this.getMenuDao().findById(Menu.class, menu.getId());
 		this.getMenuDao().delete(menuDel);
@@ -79,6 +84,7 @@ public class MenuServiceImpl implements MenuService {
 	 * .learyperi.menu.pojo.Menu)
 	 */
 	@Override
+	@Transactional
 	public void updateMenu(Menu menu) {
 		this.computePathAndLevel(menu);
 		this.getMenuDao().update(menu);
@@ -92,6 +98,21 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public Menu findMenu(int id) {
 		return this.getMenuDao().findById(Menu.class, id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.jeremiahxu.learyperi.menu.service.MenuService#findRoot()
+	 */
+	@Override
+	public Menu findRoot() {
+		List<Menu> rs = this.getMenuDao().queryByJPQL("select m from Menu m where m.name='root' and m.level=0");
+		if (rs.size() == 1) {
+			return rs.get(0);
+		} else {
+			return null;
+		}
 	}
 
 	public GenericDao<Menu, Integer> getMenuDao() {

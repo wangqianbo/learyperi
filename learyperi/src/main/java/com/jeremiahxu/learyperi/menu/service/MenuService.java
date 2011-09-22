@@ -39,4 +39,11 @@ public interface MenuService {
 	 */
 	public Menu findMenu(int id);
 
+	/**
+	 * 取得菜单跟节点。
+	 * 
+	 * @return
+	 */
+	public Menu findRoot();
+
 }
