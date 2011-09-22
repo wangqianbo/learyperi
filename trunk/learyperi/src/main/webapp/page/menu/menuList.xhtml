@@ -4,15 +4,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type="text/javascript" src="${base}/res/jquery/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="${base}/res/jquery/jquery-ui-1.8.13.min.js"></script>
 <script type="text/javascript" src="${base}/res/jstree/jquery.jstree.js"></script>
-<script type="text/javascript" src="${base}/res/js/menu/menuList.js"></script>
+<script type="text/javascript" src="${base}/res/menu/js/menuList.js"></script>
+<link rel="stylesheet" type="text/css" href="${base}/res/jquery/jquery-ui-1.8.13.css" />
 <link rel="stylesheet" type="text/css" href="${base}/res/jstree/style.css" />
-<link rel="stylesheet" type="text/css" href="${base}/res/css/menu/menu.css" />
+<link rel="stylesheet" type="text/css" href="${base}/res/menu/css/menu.css" />
 <title>菜单设置</title>
 </head>
 <body>
-<div id="menutree" class="jstree-apple">
-	<@menu.menutree topMenuClass="jstree-open" subMenuClass="jstree-open"/>
+<div class="toolsbar">
+	<a id="createTopMenu" href="#" title="创建一级菜单"><img border="0" src="${base}/res/images/crud/tree_create.png" /></a>
+	<a id="createMenu" href="#" title="创建子菜单"><img border="0" src="${base}/res/images/crud/create.png" /></a>
+	<a id="editMenu" href="#" title="编辑菜单"><img border="0" src="${base}/res/images/crud/edit.png" /></a>
+	<a id="showMenu" href="#" title="查看菜单"><img border="0" src="${base}/res/images/crud/find.png" /></a>
+	<a id="removeMenu" href="#" title="删除菜单"><img border="0" src="${base}/res/images/crud/remove.png" /></a>
 </div>
+<div id="menutree" class="jstree-apple">
+	<@menu.menutree topMenuClass="jstree-open" subMenuClass="jstree-open" />
+</div>
+<div id="detail"></div>
 </body>
 </html>
