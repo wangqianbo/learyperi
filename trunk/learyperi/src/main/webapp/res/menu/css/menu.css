@@ -1,0 +1,24 @@
+body {
+	font-family: Verdana;
+	font-size: 12px
+}
+
+div {
+	margin: 5px 5px 5px 5px;
+}
+
+form {
+	margin: 10px 10px 10px 5px;
+	autosize: true;
+	height: auto;
+	min-height: 500px
+}
+
+#menutree {
+	height: auto;
+	min-height: 500px
+}
+
+#detail {
+	white-space: nowrap
+}
