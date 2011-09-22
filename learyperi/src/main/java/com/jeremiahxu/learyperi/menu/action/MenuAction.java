@@ -26,10 +26,11 @@ import com.opensymphony.xwork2.ActionChainResult;
 @ParentPackage(value = "struts-learyperi")
 @Action(namespace = "/page/menu", name = "menu")
 @Results({ @Result(name = "list", type = FreemarkerResult.class, value = "/page/menu/menuList.xhtml"),
-		@Result(name = "create", type = ActionChainResult.class, value = "menu!listMenu.action"),
-		@Result(name = "update", type = ActionChainResult.class, value = "menu!listMenu.action"),
-		@Result(name = "delete", type = ActionChainResult.class, value = "menu!listMenu.action"),
+		@Result(name = "create", type = ActionChainResult.class, value = "/menu!listMenu.action"),
+		@Result(name = "update", type = ActionChainResult.class, value = "/menu!listMenu.action"),
+		@Result(name = "delete", type = ActionChainResult.class, value = "/menu!listMenu.action"),
 		@Result(name = "show", type = FreemarkerResult.class, value = "/page/menu/menuDetail.xhtml"),
+		@Result(name = "toNew", type = FreemarkerResult.class, value = "/page/menu/menuNew.xhtml"),
 		@Result(name = "toEdit", type = FreemarkerResult.class, value = "/page/menu/menuEdit.xhtml") })
 @Scope("request")
 public class MenuAction {
@@ -105,9 +106,14 @@ public class MenuAction {
 	 * @throws Exception
 	 */
 	public String toEdit() throws Exception {
-		this.setMenu(this.getMenuService().findMenu(this.getMenu().getId()));
-		log.info("to edit menu.");
-		return "toEdit";
+		if (this.getMenu().getId() == null) {
+			log.info("to new menu.");
+			return "toNew";
+		} else {
+			this.setMenu(this.getMenuService().findMenu(this.getMenu().getId()));
+			log.info("to edit menu.");
+			return "toEdit";
+		}
 	}
 
 	public MenuService getMenuService() {
