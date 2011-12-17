@@ -3,28 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type="text/javascript" src="res/jquery/jquery-1.6.1.min.js"></script>
-<script type="text/javascript" src="res/jquery/jquery-ui-1.8.13.min.js"></script>
-<script type="text/javascript" src="res/jquery/jquery.layout.min.js"></script>
-<script type="text/javascript" src="res/panel/js/index.js"></script>
-<link rel="shortcut icon" href="res/images/logo.ico" />
-<link rel="stylesheet" type="text/css" href="res/jquery/jquery-ui-1.8.13.css" />
-<link rel="stylesheet" type="text/css" href="res/panel/css/index.css" />
 <title>learyperi</title>
 </head>
 <body>
-	<!-- 菜单 -->
-	<div id="topmenu"><#include "/page/include/topMenu.xhtml"></div>
-	<!-- 顶部 -->
-	<div class="ui-layout-north">
-		<div><#include "/page/include/header.xhtml"></div>
-	</div>
-	<!-- 左侧 -->
-	<div class="ui-layout-west"><#include "/page/include/leftPanel.xhtml"></div>
-	<!-- 右侧  -->
-	<div class="ui-layout-east"><#include "/page/include/rightPanel.xhtml"></div>
-	<!-- 中央 -->
-	<div class="ui-layout-center"><#include "/page/include/centerPanel.xhtml"></div>
-	<!-- 底部 -->
-	<div class="ui-layout-south"><#include "/page/include/footer.xhtml"></div>
+	<div id="">加载中,请稍候!</div>
 </body>
 </html>
+<script language="javascript">
+	$(function(){
+		$("body").load("index!home.action");
+	});
+</script>
