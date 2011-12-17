@@ -18,46 +18,52 @@ import com.jeremiahxu.learyperi.dao.GenericDao;
  */
 @Repository("dao")
 public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T, ID> {
-	@PersistenceContext
-	protected EntityManager em;
+    @PersistenceContext
+    protected EntityManager em;
 
-	@Override
-	public void save(T entity) {
-		em.persist(entity);
-	}
+    @Override
+    public void save(T entity) {
+        em.persist(entity);
+    }
 
-	@Override
-	public T update(T entity) {
-		return em.merge(entity);
-	}
+    @Override
+    public T update(T entity) {
+        return em.merge(entity);
+    }
 
-	@Override
-	public void delete(T entity) {
-		em.remove(entity);
-	}
+    @Override
+    public void delete(T entity) {
+        em.remove(entity);
+    }
 
-	@Override
-	public T findById(Class<T> clazz, ID id) {
-		return em.find(clazz, id);
-	}
+    @Override
+    public T findById(Class<T> clazz, ID id) {
+        return em.find(clazz, id);
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<T> queryByJPQL(String jpql) {
-		return em.createQuery(jpql).getResultList();
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<T> queryByJPQL(String jpql) {
+        return em.createQuery(jpql).getResultList();
+    }
 
-	@Override
-	public void flush() {
-		em.flush();
-	}
+    @Override
+    public void flush() {
+        em.flush();
+    }
 
-	public EntityManager getEm() {
-		return em;
-	}
+    @Override
+    public List<T> queryAll(Class<T> clazz) {
+        String jpql = "SELECT o FROM " + clazz.getSimpleName() + " o";
+        return queryByJPQL(jpql);
+    }
 
-	public void setEm(EntityManager em) {
-		this.em = em;
-	}
+    public EntityManager getEm() {
+        return em;
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
 
 }
