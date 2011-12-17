@@ -4,7 +4,7 @@
 被授权人义务
 在软件和软件的所有副本中都必须包含本版权声明和许可声明。
 
-Copyright (C) 2011 by Jeremiah Xu
+Copyright (C) 2012 by Jeremiah Xu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Copyright 2011 by Jeremiah Xu
+Copyright 2012 by Jeremiah Xu
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
