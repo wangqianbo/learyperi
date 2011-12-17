@@ -3,10 +3,21 @@
 	<include file="struts-default.xml" />
 	<constant name="struts.i18n.encoding" value="UTF-8"/>
     <constant name="struts.action.extension" value="action"/>
-    <constant name="struts.objectFactory" value="spring" />  
-	<package name="struts-learyperi" extends="struts-default" namespace="/common">
+    <constant name="struts.objectFactory" value="spring" />
+	<package name="struts-learyperi" extends="struts-default" namespace="learyperi">
+		<!-- 
+		<interceptors>
+			<interceptor-stack name="learyperi">
+				<interceptor-ref name="defaultStack">  
+                    <param name="exception.logEnabled">true</param>  
+                    <param name="exception.logLevel">warn</param>  
+                </interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="learyperi" />
+		 -->
 		<global-results>
-			<result type="freemarker" name="error">/page/common/error.xhtml</result>
+			<result type="freemarker" name="error">/page/error/500.xhtml</result>
 		</global-results>
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="java.lang.Throwable" />
