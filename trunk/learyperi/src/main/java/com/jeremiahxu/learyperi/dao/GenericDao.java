@@ -10,15 +10,17 @@ import java.util.List;
  * 
  */
 public interface GenericDao<T, ID extends Serializable> {
-	public void save(T entity);
+    public void save(T entity);
 
-	public T update(T entity);
+    public T update(T entity);
 
-	public void delete(T entity);
+    public void delete(T entity);
 
-	public T findById(Class<T> clazz, ID id);
+    public T findById(Class<T> clazz, ID id);
 
-	public List<T> queryByJPQL(String jpql);
+    public List<T> queryByJPQL(String jpql);
 
-	public void flush();
+    public void flush();
+
+    public List<T> queryAll(Class<T> clazz);
 }
