@@ -25,4 +25,4 @@ $(function() {
 		$tabs.tabs("remove", index);
 		tab_closed_counter++;
 	});
-})
+});

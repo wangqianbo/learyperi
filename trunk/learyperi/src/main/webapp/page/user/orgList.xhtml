@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<#assign menu = JspTaglibs["/WEB-INF/org.tld"] />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="${base}/res/jquery/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="${base}/res/jquery/jquery-ui-1.8.13.min.js"></script>
+<script type="text/javascript" src="${base}/res/jstree/jquery.jstree.js"></script>
+<script type="text/javascript" src="${base}/res/menu/js/orgList.js"></script>
+<link rel="stylesheet" type="text/css" href="${base}/res/jquery/jquery-ui-1.8.13.css" />
+<link rel="stylesheet" type="text/css" href="${base}/res/jstree/style.css" />
+<link rel="stylesheet" type="text/css" href="${base}/res/user/css/org.css" />
+<title>组织结构管理</title>
+</head>
+<body>
+<div class="toolsbar">
+	<a id="createTopOrg" href="#" title="创建一级机构"><img border="0" src="${base}/res/images/crud/tree_create.png" /></a>
+	<a id="createOrg" href="#" title="创建子机构"><img border="0" src="${base}/res/images/crud/create.png" /></a>
+	<a id="editOrg" href="#" title="编辑机构"><img border="0" src="${base}/res/images/crud/edit.png" /></a>
+	<a id="showOrg" href="#" title="查看机构"><img border="0" src="${base}/res/images/crud/find.png" /></a>
+	<a id="removeOrg" href="#" title="删除机构"><img border="0" src="${base}/res/images/crud/remove.png" /></a>
+</div>
+<div id="orgtree" class="jstree-apple">
+	<@menu.menutree topMenuClass="jstree-open" subMenuClass="jstree-open" />
+</div>
+<div id="detail"></div>
+</body>
+</html>
