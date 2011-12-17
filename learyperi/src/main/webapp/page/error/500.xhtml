@@ -5,6 +5,11 @@
 <title>error</title>
 </head>
 <body>
-<div>您请求的页面不存在！</div>
+<div><#if base??><img src="${base}/res/images/error/500.png" /></#if>服务器端错误！</div>
+<#if exceptionStack??>
+<div>
+<textarea rows="20" cols="100">${exceptionStack}</textarea>
+</div>
+</#if>
 </body>
 </html>

@@ -10,4 +10,4 @@ $(function() {
 		$("#menuNewForm").attr("action", ACT_CANCLE);
 		$("#menuNewForm").submit();
 	});
-})
+});

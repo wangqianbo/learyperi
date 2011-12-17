@@ -19,6 +19,16 @@
 		<filter-name>jpaFilter</filter-name>
 		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
 	</filter>
+	<!-- 应用安全过滤器 -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
 		<url-pattern>*.action</url-pattern>
@@ -27,6 +37,7 @@
 		<filter-name>jpaFilter</filter-name>
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
+
 	<!-- spring context 监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -55,6 +66,10 @@
 		<servlet-name>freemarker</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	<!-- session超时时间（分钟） -->
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
 	<!-- 设置xhtml类型 -->
 	<mime-mapping>
 		<extension>xhtml</extension>
@@ -66,12 +81,16 @@
 	</welcome-file-list>
 	<!-- 错误页面 -->
 	<error-page>
+		<error-code>403</error-code>
+		<location>/page/error/403.xhtml</location>
+	</error-page>
+	<error-page>
 		<error-code>404</error-code>
-		<location>/page/common/404.xhtml</location>
+		<location>/page/error/404.xhtml</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/page/common/500.xhtml</location>
+		<location>/page/error/500.xhtml</location>
 	</error-page>
 	<!-- 资源配置（数据源） -->
 	<resource-ref>
@@ -79,5 +98,6 @@
 		<res-ref-name>jdbc/ds</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
 	</resource-ref>
 </web-app>

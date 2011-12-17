@@ -6,7 +6,7 @@ $(function() {
 		currentId = data.rslt.obj.children("a").attr("id");
 	});
 	$("#createTopMenu").click(function() {
-		location.href = "menu!toEdit.action?menu.parent.id=1";
+		location.href = "menu!toEdit.action?menu.parent.code=root_menu";
 	});
 	$("#createMenu").click(
 			function() {
@@ -58,4 +58,4 @@ $(function() {
 			}
 		}
 	});
-})
+});
