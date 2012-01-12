@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.jeremiahxu.learyperi.dao.GenericDao;
 import com.jeremiahxu.learyperi.user.pojo.RoleProfile;
 import com.jeremiahxu.learyperi.user.service.RoleService;
@@ -14,6 +16,7 @@ import com.jeremiahxu.learyperi.user.service.RoleService;
  * @author Jeremiah Xu
  * 
  */
+@Service("roleService")
 public class RoleServiceImpl implements RoleService {
     @Resource(name = "dao")
     private GenericDao<RoleProfile, Integer> roleDao;
