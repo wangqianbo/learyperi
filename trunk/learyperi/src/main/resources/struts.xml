@@ -1,24 +1,22 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.1.7.dtd" >
 <struts>
-	<include file="struts-default.xml" />
-	<constant name="struts.i18n.encoding" value="UTF-8"/>
-    <constant name="struts.action.extension" value="action"/>
-    <constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.action.extension" value="action" />
+	<constant name="struts.objectFactory" value="spring" />
 	<package name="struts-learyperi" extends="struts-default" namespace="learyperi">
-		<!-- 
 		<interceptors>
-			<interceptor-stack name="learyperi">
-				<interceptor-ref name="defaultStack">  
-                    <param name="exception.logEnabled">true</param>  
-                    <param name="exception.logLevel">warn</param>  
-                </interceptor-ref>
-			</interceptor-stack>
-		</interceptors>
-		<default-interceptor-ref name="learyperi" />
-		 -->
+      		<interceptor-stack name="learyperiStack">
+	        	<interceptor-ref name="exception">
+					<param name="logEnabled">true</param>
+					<param name="logLevel">warn</param>
+				</interceptor-ref>
+	       		<interceptor-ref name="defaultStack"/>
+      		</interceptor-stack>
+    	</interceptors>
+    	<default-interceptor-ref name="learyperiStack"/>
 		<global-results>
 			<result type="freemarker" name="error">/page/error/500.xhtml</result>
-		</global-results>
+		</global-results>  
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="java.lang.Throwable" />
 		</global-exception-mappings>
