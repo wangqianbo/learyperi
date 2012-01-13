@@ -28,11 +28,11 @@
 	</appender>
 
 	<root>
-		<level value="INFO" />
+		<level value="WARN" />
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE" />
 	</root>
-	<logger name="com.jeremiahxu.learyperi" level="INFO"/>
+	<logger name="com.jeremiahxu.learyperi" level="DEBUG"/>
 	<logger name="org.hibernate" level="WARN"/>
     <logger name="org.springframework" level="WARN"/>
     <logger name="com.opensymphony" level="WARN"/>
