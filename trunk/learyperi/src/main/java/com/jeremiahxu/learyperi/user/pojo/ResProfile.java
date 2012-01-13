@@ -27,7 +27,9 @@ public class ResProfile implements Serializable {
     @Column(name = "RSI_ID", length = 10)
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;// 唯一标识
-    @Column(name = "RSI_URL", length = 50, nullable = false, unique = true)
+    @Column(name = "RSI_NAME", length = 50, nullable = false, unique = true)
+    private String name;// 资源名称
+    @Column(name = "RSI_URL", length = 200, nullable = false, unique = true)
     private String url;// 可访问的方法
     @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH }, mappedBy = "resources")
     private Set<RoleProfile> roles;// 可以访问该资源的角色列表
@@ -54,6 +56,14 @@ public class ResProfile implements Serializable {
 
     public void setRoles(Set<RoleProfile> roles) {
         this.roles = roles;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

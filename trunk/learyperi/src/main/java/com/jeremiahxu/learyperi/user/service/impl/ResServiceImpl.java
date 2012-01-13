@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jeremiahxu.learyperi.dao.GenericDao;
 import com.jeremiahxu.learyperi.user.pojo.ResProfile;
@@ -27,16 +28,19 @@ public class ResServiceImpl implements ResService {
     }
 
     @Override
+    @Transactional
     public void createResource(ResProfile res) {
         this.resourceDao.save(res);
     }
 
     @Override
+    @Transactional
     public void deleteResource(ResProfile res) {
         this.resourceDao.delete(res);
     }
 
     @Override
+    @Transactional
     public void updateResource(ResProfile res) {
         this.resourceDao.update(res);
     }

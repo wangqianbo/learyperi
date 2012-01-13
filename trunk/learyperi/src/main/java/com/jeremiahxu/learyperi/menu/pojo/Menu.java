@@ -1,6 +1,7 @@
 package com.jeremiahxu.learyperi.menu.pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class Menu implements Serializable, Comparable<Menu> {
     private String namePath = "";// 名称的全路径，例如：/root/系统管理/菜单管理/
     @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, targetEntity = Menu.class, mappedBy = "parent")
     @OrderBy("order ASC")
-    private List<Menu> children;// 子节点列表
+    private List<Menu> children = new ArrayList<Menu>();// 子节点列表
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "MI_PARENT_ID")
     private Menu parent;// 父节点
@@ -137,6 +138,9 @@ public class Menu implements Serializable, Comparable<Menu> {
     }
 
     public void setChildren(List<Menu> children) {
+        for (Menu menu : children) {
+            menu.setParent(this);
+        }
         this.children = children;
     }
 
@@ -145,6 +149,7 @@ public class Menu implements Serializable, Comparable<Menu> {
     }
 
     public void setParent(Menu parent) {
+        parent.getChildren().add(this);
         this.parent = parent;
     }
 

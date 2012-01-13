@@ -1,6 +1,7 @@
 package com.jeremiahxu.learyperi.user.pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -40,14 +41,14 @@ public class OrgProfile implements Serializable {
     @Column(name = "OGI_DESC", length = 100, nullable = false)
     private String description;// 组织机构描述
     @Column(name = "OGI_ID_PATH", length = 250, nullable = false)
-    private String idPath;// 组织机构的ID全路径，例如：/123/124/323/
+    private String idPath = "";// 组织机构的ID全路径，例如：/123/124/323/
     @Column(name = "OGI_NAME_PATH", length = 250, nullable = false)
-    private String namePath;// 组织机构的名称全路径，例如：/root_org/总公司/分公司/
+    private String namePath = "";// 组织机构的名称全路径，例如：/root_org/总公司/分公司/
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "OGI_PARENT_ID")
     private OrgProfile parent;// 所属上级组织机构
     @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, targetEntity = OrgProfile.class, mappedBy = "parent")
-    private List<OrgProfile> children;// 下级组织机构列表
+    private List<OrgProfile> children = new ArrayList<OrgProfile>();// 下级组织机构列表
 
     public Integer getId() {
         return id;
@@ -78,6 +79,7 @@ public class OrgProfile implements Serializable {
     }
 
     public void setParent(OrgProfile parent) {
+        parent.getChildren().add(this);
         this.parent = parent;
     }
 
@@ -86,6 +88,9 @@ public class OrgProfile implements Serializable {
     }
 
     public void setChildren(List<OrgProfile> children) {
+        for (OrgProfile org : children) {
+            org.setParent(this);
+        }
         this.children = children;
     }
 

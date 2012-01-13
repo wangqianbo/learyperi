@@ -1,6 +1,7 @@
 package com.jeremiahxu.learyperi.config;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -13,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import com.jeremiahxu.learyperi.LearyperiException;
@@ -70,8 +71,6 @@ public class ConfigAction {
      * @throws Exception
      */
     public String initData() throws Exception {
-        ApplicationContext ctx = new FileSystemXmlApplicationContext(CONFIG_LOCATION);
-        InitData initData = (InitData) ctx.getBean("initData");
         // 判断是否有数据
         List<ResProfile> resList = this.resService.loadAllResource();
         if (resList != null && resList.size() > 0) {
@@ -93,29 +92,32 @@ public class ConfigAction {
         if (menuRoot != null) {
             throw new LearyperiException("清空数据库后才可以初始化!");
         }
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(CONFIG_LOCATION);
         // 初始化资源信息
-        for (ResProfile res : initData.getResList()) {
+        Map<String, ResProfile> resMap = ctx.getBeansOfType(ResProfile.class);
+        for (ResProfile res : resMap.values()) {
             this.resService.createResource(res);
         }
         log.info("resource init success.");
         // 初始化角色信息
-        for (RoleProfile role : initData.getRoleList()) {
+        Map<String, RoleProfile> roleMap = ctx.getBeansOfType(RoleProfile.class);
+        for (RoleProfile role : roleMap.values()) {
             this.roleService.createRole(role);
         }
         log.info("role init success.");
         // 初始化组织机构信息
-        OrgProfile org = initData.getOrg();
+        OrgProfile org = (OrgProfile) ctx.getBean("org_root");
         this.orgService.createOrg(org);
         log.info("organization init success.");
         // 初始化用户信息
-        for (UserProfile user : initData.getUserList()) {
+        Map<String, UserProfile> userMap = ctx.getBeansOfType(UserProfile.class);
+        for (UserProfile user : userMap.values()) {
             this.userService.createUser(user);
         }
         log.info("user init success.");
         // 初始化菜单信息
-        for (Menu menu : initData.getMenu()) {
-            this.menuService.createMenu(menu);
-        }
+        Menu menu = (Menu) ctx.getBean("menu_root");
+        this.menuService.createMenu(menu);
         log.info("learyperi init success.");
         return "success";
     }
