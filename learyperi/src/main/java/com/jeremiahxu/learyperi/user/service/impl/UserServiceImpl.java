@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jeremiahxu.learyperi.dao.GenericDao;
 import com.jeremiahxu.learyperi.user.UserException;
@@ -55,16 +56,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void createUser(UserProfile user) {
         this.userDao.save(user);
     }
 
     @Override
+    @Transactional
     public void deleteUser(UserProfile user) {
         this.userDao.delete(user);
     }
 
     @Override
+    @Transactional
     public void updateUser(UserProfile user) {
         this.userDao.update(user);
     }

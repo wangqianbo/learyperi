@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jeremiahxu.learyperi.dao.GenericDao;
 import com.jeremiahxu.learyperi.user.pojo.RoleProfile;
@@ -39,6 +40,7 @@ public class RoleServiceImpl implements RoleService {
      * .learyperi.user.pojo.RoleProfile)
      */
     @Override
+    @Transactional
     public void createRole(RoleProfile role) {
         this.roleDao.save(role);
     }
@@ -51,6 +53,7 @@ public class RoleServiceImpl implements RoleService {
      * .learyperi.user.pojo.RoleProfile)
      */
     @Override
+    @Transactional
     public void deleteRole(RoleProfile role) {
         this.roleDao.delete(role);
     }
@@ -63,6 +66,7 @@ public class RoleServiceImpl implements RoleService {
      * .learyperi.user.pojo.RoleProfile)
      */
     @Override
+    @Transactional
     public void updateRole(RoleProfile role) {
         this.roleDao.update(role);
     }
