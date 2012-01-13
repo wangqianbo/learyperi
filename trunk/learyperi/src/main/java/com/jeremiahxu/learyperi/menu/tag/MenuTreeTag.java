@@ -74,6 +74,7 @@ public class MenuTreeTag extends SimpleTagSupport {
             html.append("</li>");
         }
         html.append("</ul>");
+        log.debug(html.toString());
         try {
             getJspContext().getOut().print(html);
         } catch (Exception ex) {
@@ -99,6 +100,7 @@ public class MenuTreeTag extends SimpleTagSupport {
             html.append("<ul class=\"").append(this.getSubMenuClass()).append("\">");
         }
         for (Menu menuItem : menuList) {
+            html.append("<li>");
             html.append("<a id=\"").append(menuItem.getId()).append("\"");
             switch (menuItem.getType()) {
             case MenuType.OPEN_INNER_PAGE:// 在主窗体内打开子页面
