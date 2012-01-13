@@ -8,13 +8,14 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
-import org.springframework.security.web.util.AntUrlPathMatcher;
-import org.springframework.security.web.util.UrlMatcher;
+import org.springframework.security.web.util.AntPathRequestMatcher;
+import org.springframework.security.web.util.RequestMatcher;
 
 import com.jeremiahxu.learyperi.user.pojo.ResProfile;
 import com.jeremiahxu.learyperi.user.pojo.RoleProfile;
@@ -25,7 +26,6 @@ import com.jeremiahxu.learyperi.user.service.ResService;
  * 
  */
 public class InvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
-    private UrlMatcher urlMatcher = new AntUrlPathMatcher();;
     private static Map<String, Collection<ConfigAttribute>> resourceMap = null;
 
     @Resource(name = "resService")
@@ -62,26 +62,14 @@ public class InvocationSecurityMetadataSource implements FilterInvocationSecurit
      */
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
-        String url = ((FilterInvocation) object).getRequestUrl();
+        HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
         for (String resURL : resourceMap.keySet()) {
-            if (urlMatcher.pathMatchesUrl(url, resURL)) {
+            RequestMatcher requestMatcher = new AntPathRequestMatcher(resURL);
+            if (requestMatcher.matches(request)) {
                 return resourceMap.get(resURL);
             }
         }
-        // 如果URL没有设置为资源，则寻找URL的上级URL路径中被设置为资源的。
-        String tempUrl = "";
-        for (String resURL : resourceMap.keySet()) {
-            if (url.indexOf(resURL) >= 0) {
-                if (tempUrl.length() < resURL.length()) {
-                    tempUrl = resURL;
-                }
-            }
-        }
-        if (tempUrl.length() == 0) {
-            return null;
-        } else {
-            return resourceMap.get(tempUrl);
-        }
+        return null;
     }
 
     /*
