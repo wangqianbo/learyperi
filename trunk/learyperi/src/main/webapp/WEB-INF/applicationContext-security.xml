@@ -4,15 +4,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/security
-           http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 	<!-- http安全配置 -->
+	<http pattern="/page/user/user!toLogin.action" security="none" />
+	<http pattern="/page/error/**" security="none" />
+	<http pattern="/page/config/**" security="none" />
+	<http pattern="/res/**" security="none" />
 	<http access-denied-page="/page/error/403.xhtml"
 		use-expressions="true" entry-point-ref="authenticationProcessingFilterEntryPoint">
-		<intercept-url pattern="/page/user/user!toLogin.action" filters="none" />
-		<intercept-url pattern="/page/error/**" filters="none" />
-		<intercept-url pattern="/page/config/**" filters="none" />
-		<intercept-url pattern="/res/**" filters="none" />
 		<logout invalidate-session="true" logout-success-url="/page/user/user!toLogin.action" />
 		<session-management session-fixation-protection="none"
 			invalid-session-url="/page/user/user!toLogin.action?type=session_timeout">
