@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -39,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
         // 取得该用户所有角色
         for (RoleProfile role : userProfile.getRoles()) {
-            GrantedAuthority auth = new GrantedAuthorityImpl(role.getCode());
+            GrantedAuthority auth = new SimpleGrantedAuthority(role.getCode());
             auths.add(auth);
         }
         User user = new User(username, userProfile.getPassword(), true, true, true, true, auths);
