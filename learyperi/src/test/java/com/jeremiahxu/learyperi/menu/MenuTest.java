@@ -17,6 +17,8 @@ import com.jeremiahxu.learyperi.dao.GenericDao;
 import com.jeremiahxu.learyperi.menu.pojo.Menu;
 
 /**
+ * Menu对象持久化测试
+ * 
  * @author Jeremiah Xu
  * 
  */
@@ -32,7 +34,7 @@ public class MenuTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Test
     @Transactional
-    @Rollback(value = true)
+    @Rollback
     public void menuSaveThenIdIsGreaterThanZero() {
         Menu menu = MenuBuilder.aMenu().withCode("code1").withName("菜单1").withType(1).withLevel(1).withOrder(1).withImagePath("imagepath1").withUrl("url1").build();
         dao.save(menu);
@@ -42,7 +44,7 @@ public class MenuTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Test
     @Transactional
-    @Rollback(value = true)
+    @Rollback
     public void threeMenuSaveThenParentIdIsCorrect() {
         Menu menu1 = MenuBuilder.aMenu().withCode("code1").withName("菜单1").withType(1).withLevel(1).withOrder(1).withImagePath("imagepath1").withUrl("url1").build();
         Menu menu11 = MenuBuilder.aMenu().withCode("code11").withName("菜单11").withType(1).withLevel(1).withOrder(1).withImagePath("imagepath11").withUrl("url11").withParent(menu1).build();
@@ -56,7 +58,7 @@ public class MenuTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Test
     @Transactional
-    @Rollback(value = true)
+    @Rollback
     public void menuSaveAndDeleteThenNotFound() {
         Menu menu1 = MenuBuilder.aMenu().withCode("code1").withName("菜单1").withImagePath("imagepath1").withUrl("url1").build();
         dao.save(menu1);
@@ -68,7 +70,7 @@ public class MenuTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Test
     @Transactional
-    @Rollback(value = true)
+    @Rollback
     public void menuUpdate() {
         Menu menu = MenuBuilder.aMenu().withCode("code1").withName("菜单1").withImagePath("imagepath1").withUrl("url1").withLevel(1).withIdPath("/1/").withNamePath("/菜单1/").build();
         dao.save(menu);
@@ -87,7 +89,7 @@ public class MenuTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Test
     @Transactional
-    @Rollback(value = true)
+    @Rollback
     public void threeMenuSaveThenFindThreeMenu() {
         Menu menu1 = MenuBuilder.aMenu().withCode("code1").withName("菜单1").withImagePath("imagepath1").withUrl("url1").withType(1).withOrder(1).withLevel(1).withIdPath("/1/").withNamePath("/菜单1/")
                 .build();

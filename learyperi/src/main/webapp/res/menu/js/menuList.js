@@ -1,5 +1,5 @@
 $(function() {
-	var currentId = 1;
+	var currentId = 0;
 	$("#menutree").jstree({
 		"plugins" : [ "themes", "html_data", "ui", "crrm" ]
 	}).bind("select_node.jstree", function(event, data) {
@@ -10,7 +10,7 @@ $(function() {
 	});
 	$("#createMenu").click(
 			function() {
-				if (currentId == 1) {
+				if (currentId == 0) {
 					alert("请选择一个菜单项作为父菜单！");
 					return;
 				}
@@ -21,14 +21,14 @@ $(function() {
 				}
 			});
 	$("#editMenu").click(function() {
-		if (currentId == 1) {
+		if (currentId == 0) {
 			alert("请选择要编辑的菜单！");
 			return;
 		}
 		location.href = "menu!toEdit.action?menu.id=" + currentId;
 	});
 	$("#showMenu").click(function() {
-		if (currentId == 1) {
+		if (currentId == 0) {
 			alert("请选择要查看的菜单！");
 			return;
 		}
@@ -36,7 +36,7 @@ $(function() {
 		$("#detail").dialog("open");
 	});
 	$("#removeMenu").click(function() {
-		if (currentId == 1) {
+		if (currentId == 0) {
 			alert("请选择要删除的菜单！");
 			return;
 		}

@@ -37,5 +37,5 @@
     <logger name="org.springframework" level="WARN"/>
     <logger name="com.opensymphony" level="WARN"/>
     <logger name="org.apache" level="WARN"/>
-    <logger name="org.hibernate.cache" level="WARN" />
+    <logger name="org.hibernate.cache" level="DEBUG" />
 </configuration>

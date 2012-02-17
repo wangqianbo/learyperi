@@ -53,4 +53,4 @@ $(function() {
 		$("#center").height($("#center").parent().height() - 20);
 		$("#center").width($("#center").parent().width() - 20);
 	}
-})
+});

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 
 import com.jeremiahxu.learyperi.menu.pojo.Menu;
 import com.jeremiahxu.learyperi.menu.service.MenuService;
-import com.opensymphony.xwork2.ActionChainResult;
 
 /**
  * menu action
@@ -25,10 +24,8 @@ import com.opensymphony.xwork2.ActionChainResult;
 @Controller
 @ParentPackage(value = "struts-learyperi")
 @Action(namespace = "/page/menu", name = "menu")
-@Results({ @Result(name = "list", type = FreemarkerResult.class, value = "/page/menu/menuList.xhtml"), @Result(name = "create", type = ActionChainResult.class, value = "/menu!listMenu.action"),
-        @Result(name = "update", type = ActionChainResult.class, value = "/menu!listMenu.action"), @Result(name = "delete", type = ActionChainResult.class, value = "/menu!listMenu.action"),
-        @Result(name = "show", type = FreemarkerResult.class, value = "/page/menu/menuDetail.xhtml"), @Result(name = "toNew", type = FreemarkerResult.class, value = "/page/menu/menuNew.xhtml"),
-        @Result(name = "toEdit", type = FreemarkerResult.class, value = "/page/menu/menuEdit.xhtml") })
+@Results({ @Result(name = "list", type = FreemarkerResult.class, value = "/page/menu/menuList.xhtml"), @Result(name = "show", type = FreemarkerResult.class, value = "/page/menu/menuDetail.xhtml"),
+        @Result(name = "toNew", type = FreemarkerResult.class, value = "/page/menu/menuNew.xhtml"), @Result(name = "toEdit", type = FreemarkerResult.class, value = "/page/menu/menuEdit.xhtml") })
 @Scope("request")
 public class MenuAction {
     protected Logger log = LoggerFactory.getLogger(this.getClass());
@@ -44,7 +41,7 @@ public class MenuAction {
      * @throws Exception
      */
     public String listMenu() throws Exception {
-        log.info("list menu.");
+        log.debug("list menu.");
         return "list";
     }
 
@@ -56,8 +53,8 @@ public class MenuAction {
      */
     public String createMenu() throws Exception {
         this.getMenuService().createMenu(this.getMenu());
-        log.info("create menu.");
-        return "create";
+        log.debug("create menu.");
+        return "list";
     }
 
     /**
@@ -68,8 +65,8 @@ public class MenuAction {
      */
     public String updateMenu() throws Exception {
         this.getMenuService().updateMenu(this.getMenu());
-        log.info("update menu.");
-        return "update";
+        log.debug("update menu.");
+        return "list";
     }
 
     /**
@@ -80,8 +77,8 @@ public class MenuAction {
      */
     public String deleteMenu() throws Exception {
         this.getMenuService().deleteMenu(this.getMenu());
-        log.info("delete menu.");
-        return "delete";
+        log.debug("delete menu.");
+        return "list";
     }
 
     /**
@@ -92,7 +89,7 @@ public class MenuAction {
      */
     public String showMenu() throws Exception {
         this.setMenu(this.getMenuService().findMenu(this.getMenu().getId()));
-        log.info("show menu.");
+        log.debug("show menu.");
         return "show";
     }
 
@@ -104,15 +101,15 @@ public class MenuAction {
      */
     public String toEdit() throws Exception {
         if (this.getMenu().getId() == null) {// 如果没有id则属于新增菜单操作
-            if ("root_menu".equals(this.getMenu().getParent().getCode())) {// 如果没有父菜单则属于新建一级菜单
+            if ("root_menu".equals(this.getMenu().getParent().getCode())) {// 如果父菜单为根则属于新建一级菜单
                 Menu root = this.getMenuService().findRoot();
                 this.getMenu().setParent(root);
             }
-            log.info("to new menu.");
+            log.debug("to new menu.");
             return "toNew";
         } else {// 修改菜单操作，先取得指定菜单信息。
             this.setMenu(this.getMenuService().findMenu(this.getMenu().getId()));
-            log.info("to edit menu.");
+            log.debug("to edit menu.");
             return "toEdit";
         }
     }

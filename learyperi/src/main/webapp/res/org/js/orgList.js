@@ -1,16 +1,16 @@
 $(function() {
-	var currentId = 1;
+	var currentId = 0;
 	$("#orgtree").jstree({
 		"plugins" : [ "themes", "html_data", "ui", "crrm" ]
 	}).bind("select_node.jstree", function(event, data) {
 		currentId = data.rslt.obj.children("a").attr("id");
 	});
 	$("#createTopOrg").click(function() {
-		location.href = "org!toEdit.action?org.parent.id=1";
+		location.href = "org!toEdit.action?org.parent.code=root_org";
 	});
 	$("#createOrg").click(
 			function() {
-				if (currentId == 1) {
+				if (currentId == 0) {
 					alert("请选择一个机构作为父机构！");
 					return;
 				}
@@ -21,14 +21,14 @@ $(function() {
 				}
 			});
 	$("#editOrg").click(function() {
-		if (currentId == 1) {
+		if (currentId == 0) {
 			alert("请选择要编辑的机构！");
 			return;
 		}
 		location.href = "org!toEdit.action?org.id=" + currentId;
 	});
 	$("#showOrg").click(function() {
-		if (currentId == 1) {
+		if (currentId == 0) {
 			alert("请选择要查看的机构！");
 			return;
 		}
@@ -36,7 +36,7 @@ $(function() {
 		$("#detail").dialog("open");
 	});
 	$("#removeOrg").click(function() {
-		if (currentId == 1) {
+		if (currentId == 0) {
 			alert("请选择要删除的机构！");
 			return;
 		}
