@@ -23,7 +23,6 @@ import com.jeremiahxu.learyperi.user.service.OrgService;
  * 
  */
 public class OrgTreeTag extends SimpleTagSupport {
-    private static final long serialVersionUID = 1L;
     protected Logger log = LoggerFactory.getLogger(this.getClass());
     private OrgProfile org;
     private String topOrgClass = "jstree-open";// 顶层组织机构class
@@ -31,13 +30,13 @@ public class OrgTreeTag extends SimpleTagSupport {
 
     @Override
     public void doTag() throws JspException, IOException {
-        if (org == null) {// 如果标签的menu属性没有值则读取数据库取得菜单树
+        if (org == null) {// 如果标签的org属性没有值则读取数据库取得组织结构信息
             ServletContext servletContext = ((PageContext) this.getJspContext()).getServletContext();
             WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
             OrgService orgService = (OrgService) ctx.getBean("orgService");
             this.setOrg(orgService.findRoot());
         }
-        // 生成第一层菜单
+        // 生成第一层组织结构
         List<OrgProfile> orgList = this.getOrg().getChildren();
         StringBuffer html = new StringBuffer();
         if (this.getTopOrgClass() == null) {
@@ -48,7 +47,7 @@ public class OrgTreeTag extends SimpleTagSupport {
         for (OrgProfile orgItem : orgList) {
             html.append("<li>");
             html.append("<a id=\"").append(orgItem.getId()).append("\" href=\"#\">").append(orgItem.getName()).append("</a>");
-            // 递归生成菜单
+            // 递归生成组织结构
             html.append(this.writeHTML(orgItem));
             html.append("</li>");
         }
@@ -61,9 +60,9 @@ public class OrgTreeTag extends SimpleTagSupport {
     }
 
     /**
-     * 递归菜单生成HTML
+     * 递归组织结构生成HTML
      * 
-     * @param menu
+     * @param org
      * @return
      */
     private String writeHTML(OrgProfile org) {

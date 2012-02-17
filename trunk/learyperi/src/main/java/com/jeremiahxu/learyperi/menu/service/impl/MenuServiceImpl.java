@@ -78,8 +78,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     @Transactional
     public void deleteMenu(Menu menu) {
-        Menu menuDel = this.getMenuDao().findById(Menu.class, menu.getId());
-        this.getMenuDao().delete(menuDel);
+        this.getMenuDao().delete(Menu.class, menu.getId());
     }
 
     /*

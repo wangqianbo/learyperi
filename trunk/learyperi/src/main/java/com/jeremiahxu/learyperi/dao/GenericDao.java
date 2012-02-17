@@ -16,6 +16,8 @@ public interface GenericDao<T, ID extends Serializable> {
 
     public void delete(T entity);
 
+    public void delete(Class<T> clazz, ID id);
+
     public T findById(Class<T> clazz, ID id);
 
     public List<T> queryByJPQL(String jpql);
@@ -23,4 +25,5 @@ public interface GenericDao<T, ID extends Serializable> {
     public void flush();
 
     public List<T> queryAll(Class<T> clazz);
+
 }

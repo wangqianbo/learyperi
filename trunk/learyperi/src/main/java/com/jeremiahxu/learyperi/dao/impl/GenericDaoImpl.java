@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -37,6 +38,12 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
     }
 
     @Override
+    public void delete(Class<T> clazz, ID id) {
+        T obj = em.find(clazz, id);
+        em.remove(obj);
+    }
+
+    @Override
     public T findById(Class<T> clazz, ID id) {
         return em.find(clazz, id);
     }
@@ -44,7 +51,8 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
     @SuppressWarnings("unchecked")
     @Override
     public List<T> queryByJPQL(String jpql) {
-        return em.createQuery(jpql).getResultList();
+        Query query = em.createQuery(jpql);
+        return query.getResultList();
     }
 
     @Override
@@ -56,14 +64,6 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
     public List<T> queryAll(Class<T> clazz) {
         String jpql = "SELECT o FROM " + clazz.getSimpleName() + " o";
         return queryByJPQL(jpql);
-    }
-
-    public EntityManager getEm() {
-        return em;
-    }
-
-    public void setEm(EntityManager em) {
-        this.em = em;
     }
 
 }

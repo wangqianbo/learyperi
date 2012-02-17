@@ -18,6 +18,8 @@ import com.jeremiahxu.learyperi.menu.MenuBuilder;
 import com.jeremiahxu.learyperi.menu.pojo.Menu;
 
 /**
+ * 菜单服务实现类测试
+ * 
  * @author Jeremiah Xu
  * 
  */

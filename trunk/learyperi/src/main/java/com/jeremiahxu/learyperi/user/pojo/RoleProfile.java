@@ -15,6 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * 用户角色实体对象
  * 
@@ -23,6 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "T_ROLE_INFO")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RoleProfile implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

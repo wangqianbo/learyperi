@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,9 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 /**
  * menu item
  * 
@@ -29,7 +27,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "T_MENU_INFO")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cacheable
 public class Menu implements Serializable, Comparable<Menu> {
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,7 +55,7 @@ public class Menu implements Serializable, Comparable<Menu> {
     @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, targetEntity = Menu.class, mappedBy = "parent")
     @OrderBy("order ASC")
     private List<Menu> children = new ArrayList<Menu>();// 子节点列表
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "MI_PARENT_ID")
     private Menu parent;// 父节点
 

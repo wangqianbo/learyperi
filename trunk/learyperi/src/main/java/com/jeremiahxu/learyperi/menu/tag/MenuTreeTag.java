@@ -25,11 +25,10 @@ import com.jeremiahxu.learyperi.menu.service.MenuService;
  * 
  */
 public class MenuTreeTag extends SimpleTagSupport {
-    private static final long serialVersionUID = 1L;
     protected Logger log = LoggerFactory.getLogger(this.getClass());
     private Menu menu;
-    private String topMenuClass;// 顶层菜单class
-    private String subMenuClass;// 各级子菜单class
+    private String topMenuClass = "jstree-open";// 顶层菜单class
+    private String subMenuClass = "jstree-open";// 各级子菜单class
 
     @Override
     public void doTag() throws JspException, IOException {

@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * 可操作资源对象，基本上就是可访问的URL。
  * 
@@ -21,6 +24,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "T_RES_INFO")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ResProfile implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
