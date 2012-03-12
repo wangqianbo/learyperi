@@ -5,9 +5,10 @@ $(function() {
 	$("#save-menu").button().click(function() {
 		$("#menuNewForm").attr("action", ACT_SUBMIT);
 		$("#menuNewForm").submit();
+		return false;
 	});
 	$("#cancle-menu").button().click(function() {
-		$("#menuNewForm").attr("action", ACT_CANCLE);
-		$("#menuNewForm").submit();
+		location.href = "menu!listMenu.action";
+		return false;
 	});
 });

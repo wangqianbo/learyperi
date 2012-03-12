@@ -16,9 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 /**
  * 用户实体对象
  * 
@@ -27,7 +24,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "T_USER_INFO")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserProfile implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

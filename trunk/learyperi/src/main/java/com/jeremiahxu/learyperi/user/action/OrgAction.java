@@ -6,6 +6,7 @@ import org.apache.struts2.config.Action;
 import org.apache.struts2.config.ParentPackage;
 import org.apache.struts2.config.Result;
 import org.apache.struts2.config.Results;
+import org.apache.struts2.dispatcher.ServletRedirectResult;
 import org.apache.struts2.views.freemarker.FreemarkerResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +25,9 @@ import com.jeremiahxu.learyperi.user.service.OrgService;
 @Controller
 @ParentPackage(value = "struts-learyperi")
 @Action(namespace = "/page/org", name = "org")
-@Results({ @Result(name = "list", type = FreemarkerResult.class, value = "/page/org/orgList.xhtml"), @Result(name = "show", type = FreemarkerResult.class, value = "/page/org/orgDetail.xhtml"),
-    @Result(name = "toNew", type = FreemarkerResult.class, value = "/page/org/orgNew.xhtml"), @Result(name = "toEdit", type = FreemarkerResult.class, value = "/page/org/orgEdit.xhtml") })
+@Results({ @Result(name = "toList", type = ServletRedirectResult.class, value = "/page/org/org!listOrg.action"), @Result(name = "list", type = FreemarkerResult.class, value = "/page/org/orgList.xhtml"),
+        @Result(name = "show", type = FreemarkerResult.class, value = "/page/org/orgDetail.xhtml"), @Result(name = "toNew", type = FreemarkerResult.class, value = "/page/org/orgNew.xhtml"),
+        @Result(name = "toEdit", type = FreemarkerResult.class, value = "/page/org/orgEdit.xhtml") })
 @Scope("request")
 public class OrgAction {
     protected Logger log = LoggerFactory.getLogger(this.getClass());
@@ -53,7 +55,7 @@ public class OrgAction {
     public String createOrg() throws Exception {
         this.getOrgService().createOrg(this.getOrg());
         log.debug("create org.");
-        return "list";
+        return "toList";
     }
 
     /**
@@ -65,7 +67,7 @@ public class OrgAction {
     public String updateOrg() throws Exception {
         this.getOrgService().updateOrg(this.getOrg());
         log.debug("update org.");
-        return "list";
+        return "toList";
     }
 
     /**
@@ -77,7 +79,7 @@ public class OrgAction {
     public String deleteOrg() throws Exception {
         this.getOrgService().deleteOrg(this.getOrg());
         log.debug("delete org.");
-        return "list";
+        return "toList";
     }
 
     /**

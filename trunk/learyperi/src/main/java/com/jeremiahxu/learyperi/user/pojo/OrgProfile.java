@@ -16,9 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 /**
  * 组织结构实体对象
  * 
@@ -27,7 +24,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "T_ORG_INFO")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class OrgProfile implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

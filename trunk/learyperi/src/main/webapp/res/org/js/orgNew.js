@@ -5,6 +5,7 @@ $(function() {
 	$("#save-org").button().click(function() {
 		$("#orgNewForm").attr("action", ACT_SUBMIT);
 		$("#orgNewForm").submit();
+		return false;
 	});
 	$("#cancle-org").button().click(function() {
 		$("#orgNewForm").attr("action", ACT_CANCLE);

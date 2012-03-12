@@ -1,15 +1,13 @@
+var ACT_SUBMIT = "org!updateOrg.action";
+var ACT_CANCLE = "org!listOrg.action";
 $(function() {
 	$("#save-org").button().click(function() {
-		if ($("#orgId").val() == "" || $("#orgId").val() == "0") {
-			$("#orgEditForm").attr("action", "org!createOrg.action");
-		} else {
-			$("#orgEditForm").attr("action", "org!updateOrg.action");
-		}
+		$("#orgEditForm").attr("action", ACT_SUBMIT);
 		$("#orgEditForm").submit();
 		return false;
 	});
 	$("#cancle-org").button().click(function() {
-		location.href = "org!listOrg.action";
+		location.href = ACT_CANCLE;
 		return false;
 	});
 });
