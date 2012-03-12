@@ -71,6 +71,30 @@
 								<property name="url"><value><![CDATA[/page/menu/menu!listMenu.action]]></value></property>
 								<property name="imagePath"><value></value></property>
 							</bean>
+							<bean id="menu_org_config" class="com.jeremiahxu.learyperi.menu.pojo.Menu">
+								<property name="code"><value>org_config</value></property>
+								<property name="name"><value>组织结构设置</value></property>
+								<property name="order"><value>200</value></property>
+								<property name="type"><value>0</value></property>
+								<property name="url"><value><![CDATA[/page/org/org!listOrg.action]]></value></property>
+								<property name="imagePath"><value></value></property>
+							</bean>
+							<bean id="menu_role_config" class="com.jeremiahxu.learyperi.menu.pojo.Menu">
+								<property name="code"><value>role_config</value></property>
+								<property name="name"><value>角色设置</value></property>
+								<property name="order"><value>300</value></property>
+								<property name="type"><value>0</value></property>
+								<property name="url"><value><![CDATA[/page/role/role!listRole.action]]></value></property>
+								<property name="imagePath"><value></value></property>
+							</bean>
+							<bean id="menu_user_config" class="com.jeremiahxu.learyperi.menu.pojo.Menu">
+								<property name="code"><value>user_config</value></property>
+								<property name="name"><value>用户管理</value></property>
+								<property name="order"><value>400</value></property>
+								<property name="type"><value>0</value></property>
+								<property name="url"><value><![CDATA[/page/user/user!listUser.action]]></value></property>
+								<property name="imagePath"><value></value></property>
+							</bean>
 						</set>
 					</property>
 				</bean>
