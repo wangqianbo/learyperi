@@ -6,6 +6,7 @@ import org.apache.struts2.config.Action;
 import org.apache.struts2.config.ParentPackage;
 import org.apache.struts2.config.Result;
 import org.apache.struts2.config.Results;
+import org.apache.struts2.dispatcher.ServletRedirectResult;
 import org.apache.struts2.views.freemarker.FreemarkerResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,8 @@ import com.jeremiahxu.learyperi.menu.service.MenuService;
 @Controller
 @ParentPackage(value = "struts-learyperi")
 @Action(namespace = "/page/menu", name = "menu")
-@Results({ @Result(name = "list", type = FreemarkerResult.class, value = "/page/menu/menuList.xhtml"), @Result(name = "show", type = FreemarkerResult.class, value = "/page/menu/menuDetail.xhtml"),
+@Results({ @Result(name = "toList", type = ServletRedirectResult.class, value = "/page/menu/menu!listMenu.action"),
+        @Result(name = "list", type = FreemarkerResult.class, value = "/page/menu/menuList.xhtml"), @Result(name = "show", type = FreemarkerResult.class, value = "/page/menu/menuDetail.xhtml"),
         @Result(name = "toNew", type = FreemarkerResult.class, value = "/page/menu/menuNew.xhtml"), @Result(name = "toEdit", type = FreemarkerResult.class, value = "/page/menu/menuEdit.xhtml") })
 @Scope("request")
 public class MenuAction {
@@ -54,7 +56,7 @@ public class MenuAction {
     public String createMenu() throws Exception {
         this.getMenuService().createMenu(this.getMenu());
         log.debug("create menu.");
-        return "list";
+        return "toList";
     }
 
     /**
@@ -66,7 +68,7 @@ public class MenuAction {
     public String updateMenu() throws Exception {
         this.getMenuService().updateMenu(this.getMenu());
         log.debug("update menu.");
-        return "list";
+        return "toList";
     }
 
     /**
@@ -78,7 +80,7 @@ public class MenuAction {
     public String deleteMenu() throws Exception {
         this.getMenuService().deleteMenu(this.getMenu());
         log.debug("delete menu.");
-        return "list";
+        return "toList";
     }
 
     /**
