@@ -1,5 +1,7 @@
 package com.jeremiahxu.learyperi.menu;
 
+import java.util.List;
+
 import com.jeremiahxu.learyperi.menu.pojo.Menu;
 
 public class MenuBuilder {
@@ -64,6 +66,11 @@ public class MenuBuilder {
 
     public MenuBuilder withParent(Menu parent) {
         this.menu.setParent(parent);
+        return this;
+    }
+
+    public MenuBuilder withChildren(List<Menu> children) {
+        this.menu.setChildren(children);
         return this;
     }
 

@@ -1,0 +1,9 @@
+.add {
+	background: url('../images/crud/create.png') no-repeat center left;
+}
+.edit {
+	background: url('../images/crud/edit.png') no-repeat center left;
+}
+.delete {
+	background: url('../images/crud/remove.png') no-repeat center left;
+}

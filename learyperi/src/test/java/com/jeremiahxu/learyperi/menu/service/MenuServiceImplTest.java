@@ -81,7 +81,7 @@ public class MenuServiceImplTest extends AbstractTransactionalJUnit4SpringContex
         int id = menu.getId();
         Menu menuDel = new Menu();
         menuDel.setId(id);
-        menuService.deleteMenu(menu);
+        menuService.deleteMenu(menuDel);
         Menu menuComp = menuService.findMenu(id);
         Assert.assertNull("菜单未删除", menuComp);
     }
@@ -128,5 +128,17 @@ public class MenuServiceImplTest extends AbstractTransactionalJUnit4SpringContex
         List<Menu> menuList = parent.getChildren();
         Assert.assertTrue("子菜单顺序错误", (menuList.get(0).getOrder() == order2) && (menuList.get(1).getOrder() == order1) && (menuList.get(2).getOrder() == order3));
     }
-
+    @Test
+    @Transactional
+    @Rollback(value = true)
+    public void createRootMenuAndFingRootMenu(){
+        Menu menu = MenuBuilder.aMenu().withCode("root_menu").withName("菜单1").withType(1).withOrder(1).withImagePath("imagepath1").withUrl("url1").build();
+        menuService.createMenu(menu);
+        int id = menu.getId();
+        Menu menuComp = menuService.findRoot();
+        Assert.assertTrue("创建菜单失败", menu.equals(menuComp));
+        Assert.assertTrue("idpath不正确", menuComp.getIdPath().equals("/" + id + "/"));
+        Assert.assertTrue("level不正确", menuComp.getLevel() == 0);
+        Assert.assertTrue("namepath不正确", menuComp.getNamePath().equals("/菜单1/"));
+    }
 }

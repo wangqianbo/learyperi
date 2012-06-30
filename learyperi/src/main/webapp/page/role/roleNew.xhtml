@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="${base}/res/jquery/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="${base}/res/jquery/jquery-ui-1.8.13.min.js"></script>
+<script type="text/javascript" src="${base}/res/org/js/orgNew.js"></script>
+<link rel="stylesheet" type="text/css" href="${base}/res/jquery/jquery-ui-1.8.13.css" />
+<link rel="stylesheet" type="text/css" href="${base}/res/org/css/org.css" />
+<title>组织结构设置</title>
+</head>
+<body>
+
+<form method="post" id="orgNewForm" action="">
+<div>
+	<input type="hidden" id="parentId" name="org.parent.id" value="${org.parent.id}"/>
+</div>
+<table>
+	<tr>
+		<td>上级组织机构名称:</td>
+		<td><input name="org.parent.name" value="${org.parent.name}" disabled="disabled"/></td>
+	</tr>
+	<tr>
+		<td>组织机构代码:</td>
+		<td><input name="org.code" value="${org.code}"/></td>
+	</tr>
+	<tr>
+		<td>组织机构名称:</td>
+		<td><input name="org.name" value="${org.name}"/></td>
+	</tr>
+	<tr>
+		<td>组织机构描述</td>
+		<td><input name="org.description" value="${org.description}"/></td>
+	</tr>
+	<tr>
+		<td colspan="2">	
+			<button id="save-org">保存</button>
+			<button id="cancle-org">取消</button>
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>
