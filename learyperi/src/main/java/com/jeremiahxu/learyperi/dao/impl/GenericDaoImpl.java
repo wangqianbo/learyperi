@@ -2,6 +2,7 @@ package com.jeremiahxu.learyperi.dao.impl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -48,22 +49,54 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
         return em.find(clazz, id);
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<T> queryByJPQL(String jpql) {
-        Query query = em.createQuery(jpql);
-        return query.getResultList();
-    }
-
     @Override
     public void flush() {
         em.flush();
     }
 
     @Override
+    public void clear() {
+        em.clear();
+    }
+
+    @Override
     public List<T> queryAll(Class<T> clazz) {
         String jpql = "SELECT o FROM " + clazz.getSimpleName() + " o";
-        return queryByJPQL(jpql);
+        return query(jpql);
+    }
+
+    @Override
+    public List<T> query(String jpql) {
+        return query(jpql, null);
+    }
+
+    @Override
+    public List<T> query(String jpql, Map<String, ? extends Object> params) {
+        return query(jpql, params, -1, -1);
+    }
+
+    @Override
+    public List<T> query(String jpql, int pageNumber, int numberPerPage) {
+        return query(jpql, null, pageNumber, numberPerPage);
+    }
+
+    @Override
+    public List<T> query(String jpql, Map<String, ? extends Object> params, int pageNumber, int numberPerPage) {
+        Query query = em.createQuery(jpql);
+        if (params != null && !params.isEmpty()) {// 如果有条件参数
+            for (String key : params.keySet()) {
+                query.setParameter(key, params.get(key));
+            }
+        }
+        if (pageNumber >= 0 && numberPerPage > 0) {
+            int firstResult = (pageNumber - 1) * numberPerPage;
+            int maxResult = pageNumber * numberPerPage;
+            query.setFirstResult(firstResult);
+            query.setMaxResults(maxResult);
+        }
+        @SuppressWarnings("unchecked")
+        List<T> rs = query.getResultList();
+        return rs;
     }
 
 }

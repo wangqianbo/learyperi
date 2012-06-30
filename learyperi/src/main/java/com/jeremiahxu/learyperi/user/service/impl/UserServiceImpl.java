@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserProfile loadByName(String name) {
         String jpql = "select u from UserProfile u where u.name='" + name + "'";
-        List<UserProfile> rs = userDao.queryByJPQL(jpql);
+        List<UserProfile> rs = userDao.query(jpql);
         if (rs.size() < 1) {// 未取得用户信息
             throw new UserException("user[" + name + "] is not exists.");
         } else if (rs.size() == 1) {// 正确取得用户信息
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserProfile loadByNameAndPassword(String name, String password) {
         String jpql = "select u from UserProfile u where u.name='" + name + "' and u.password='" + password + "'";
-        List<UserProfile> rs = userDao.queryByJPQL(jpql);
+        List<UserProfile> rs = userDao.query(jpql);
         if (rs.size() < 1) {// 用户登录失败
             return null;
         } else if (rs.size() == 1) {// 正确取得用户信息，用户登录成功。
@@ -64,7 +64,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void deleteUser(UserProfile user) {
-        this.userDao.delete(user);
+        UserProfile userDel = this.getUserDao().findById(UserProfile.class, user.getId());
+        userDel.setOrg(null);
+        userDel.setRoles(null);
+        this.userDao.update(userDel);
+        this.userDao.delete(userDel);
     }
 
     @Override

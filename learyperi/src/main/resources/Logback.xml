@@ -15,7 +15,7 @@
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<File>${user.dir}/logs/learyperi.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<FileNamePattern>learyperi.log.%i.bak</FileNamePattern>
+			<FileNamePattern>${user.dir}/logs/learyperi.log.%i.bak</FileNamePattern>
 			<MinIndex>1</MinIndex>
 			<MaxIndex>10</MaxIndex>
 		</rollingPolicy>
@@ -37,5 +37,5 @@
     <logger name="org.springframework" level="WARN"/>
     <logger name="com.opensymphony" level="WARN"/>
     <logger name="org.apache" level="WARN"/>
-    <logger name="org.hibernate.cache" level="DEBUG" />
+    <logger name="org.hibernate.cache" level="WARN" />
 </configuration>

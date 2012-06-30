@@ -145,7 +145,6 @@ public class Menu implements Serializable, Comparable<Menu> {
     }
 
     public void setParent(Menu parent) {
-        parent.getChildren().add(this);
         this.parent = parent;
     }
 
