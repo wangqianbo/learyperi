@@ -35,9 +35,10 @@ public class RoleProfile implements Serializable {
     private String name;// 角色名称
     @Column(name = "ROI_DESC", length = 100, nullable = false)
     private String description;// 角色描述
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH }, mappedBy = "roles")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REFRESH }, targetEntity = UserProfile.class)
+    @JoinTable(name = "T_USER_ROLE_REL", joinColumns = { @JoinColumn(name = "ROI_ID") }, inverseJoinColumns = { @JoinColumn(name = "USI_ID") })
     private Set<UserProfile> users;// 角色所包括的用户
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH }, targetEntity = ResProfile.class)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REFRESH }, targetEntity = ResProfile.class)
     @JoinTable(name = "T_ROLE_RES_REL", joinColumns = { @JoinColumn(name = "ROI_ID") }, inverseJoinColumns = { @JoinColumn(name = "RSI_ID") })
     private Set<ResProfile> resources;// 角色可以访问的资源列表
 

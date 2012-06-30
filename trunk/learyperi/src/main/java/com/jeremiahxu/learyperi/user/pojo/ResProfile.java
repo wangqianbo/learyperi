@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -31,7 +33,8 @@ public class ResProfile implements Serializable {
     private String name;// 资源名称
     @Column(name = "RSI_URL", length = 200, nullable = false, unique = true)
     private String url;// 可访问的方法
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH }, mappedBy = "resources")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE,CascadeType.REFRESH }, targetEntity = RoleProfile.class)
+    @JoinTable(name = "T_ROLE_RES_REL", joinColumns = { @JoinColumn(name = "RSI_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROI_ID") })
     private Set<RoleProfile> roles;// 可以访问该资源的角色列表
 
     public Integer getId() {

@@ -36,7 +36,10 @@ public class ResServiceImpl implements ResService {
     @Override
     @Transactional
     public void deleteResource(ResProfile res) {
-        this.resourceDao.delete(res);
+        ResProfile resDel = this.getResourceDao().findById(ResProfile.class, res.getId());
+        resDel.setRoles(null);
+        this.resourceDao.update(resDel);
+        this.resourceDao.delete(resDel);
     }
 
     @Override

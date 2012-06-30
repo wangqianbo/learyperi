@@ -22,7 +22,7 @@ import com.jeremiahxu.learyperi.menu.service.MenuService;
  * @author Jeremiah Xu
  * 
  */
-@Controller
+@Controller("menuAction")
 @ParentPackage(value = "struts-learyperi")
 @Action(namespace = "/page/menu", name = "menu")
 @Results({ @Result(name = "toList", type = ServletRedirectResult.class, value = "/page/menu/menu!listMenu.action"),
@@ -96,24 +96,29 @@ public class MenuAction {
     }
 
     /**
+     * 跳转去新建页面
+     * 
+     * @return
+     */
+    public String toNew() {
+        if ("root_menu".equals(this.getMenu().getParent().getCode())) {// 如果父菜单为根则属于新建一级菜单
+            Menu root = this.getMenuService().findRoot();
+            this.getMenu().setParent(root);
+        }
+        log.debug("to new menu.");
+        return "toNew";
+    }
+
+    /**
      * 去菜单编辑页面
      * 
      * @return
      * @throws Exception
      */
     public String toEdit() throws Exception {
-        if (this.getMenu().getId() == null) {// 如果没有id则属于新增菜单操作
-            if ("root_menu".equals(this.getMenu().getParent().getCode())) {// 如果父菜单为根则属于新建一级菜单
-                Menu root = this.getMenuService().findRoot();
-                this.getMenu().setParent(root);
-            }
-            log.debug("to new menu.");
-            return "toNew";
-        } else {// 修改菜单操作，先取得指定菜单信息。
-            this.setMenu(this.getMenuService().findMenu(this.getMenu().getId()));
-            log.debug("to edit menu.");
-            return "toEdit";
-        }
+        this.setMenu(this.getMenuService().findMenu(this.getMenu().getId()));
+        log.debug("to edit menu.");
+        return "toEdit";
     }
 
     public MenuService getMenuService() {

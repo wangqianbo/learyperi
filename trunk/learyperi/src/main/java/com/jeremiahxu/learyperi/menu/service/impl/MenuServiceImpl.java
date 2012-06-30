@@ -112,7 +112,7 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public Menu findRoot() {
-        List<Menu> rs = this.getMenuDao().queryByJPQL("select m from Menu m where m.code='root_menu' and m.level=0");
+        List<Menu> rs = this.getMenuDao().query("select m from Menu m where m.code='root_menu' and m.level=0");
         if (rs.size() == 1) {
             return rs.get(0);
         } else {

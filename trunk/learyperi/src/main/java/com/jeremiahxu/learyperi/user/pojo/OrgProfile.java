@@ -2,6 +2,7 @@ package com.jeremiahxu.learyperi.user.pojo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "T_ORG_INFO")
-public class OrgProfile implements Serializable {
+public class OrgProfile implements Serializable, Comparable<OrgProfile> {
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "OGI_ID", length = 10)
@@ -48,6 +50,7 @@ public class OrgProfile implements Serializable {
     @JoinColumn(name = "OGI_PARENT_ID")
     private OrgProfile parent;// 所属上级组织机构
     @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, targetEntity = OrgProfile.class, mappedBy = "parent")
+    @OrderBy("order ASC")
     private List<OrgProfile> children = new ArrayList<OrgProfile>();// 下级组织机构列表
 
     public Integer getId() {
@@ -79,11 +82,13 @@ public class OrgProfile implements Serializable {
     }
 
     public void setParent(OrgProfile parent) {
-        parent.getChildren().add(this);
         this.parent = parent;
     }
 
     public List<OrgProfile> getChildren() {
+        if (children != null) {
+            Collections.sort(children);
+        }
         return children;
     }
 
@@ -134,4 +139,8 @@ public class OrgProfile implements Serializable {
         this.code = code;
     }
 
+    @Override
+    public int compareTo(OrgProfile o) {
+        return this.order - o.getOrder();
+    }
 }

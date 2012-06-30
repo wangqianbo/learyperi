@@ -55,7 +55,11 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional
     public void deleteRole(RoleProfile role) {
-        this.roleDao.delete(role);
+        RoleProfile roleDel = this.getRoleDao().findById(RoleProfile.class, role.getId());
+        roleDel.setUsers(null);
+        roleDel.setResources(null);
+        this.roleDao.update(roleDel);
+        this.roleDao.delete(roleDel);
     }
 
     /*
@@ -79,6 +83,12 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public RoleProfile findRole(int id) {
         return this.roleDao.findById(RoleProfile.class, id);
+    }
+
+    @Override
+    public List<RoleProfile> findPagedRoles(int pageNumber, int numberPerPage) {
+        String jpql = "select r from RoleProfile r order by r.code";
+        return roleDao.query(jpql, pageNumber, numberPerPage);
     }
 
     public GenericDao<RoleProfile, Integer> getRoleDao() {

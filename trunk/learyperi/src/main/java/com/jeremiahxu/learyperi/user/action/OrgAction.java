@@ -25,9 +25,9 @@ import com.jeremiahxu.learyperi.user.service.OrgService;
 @Controller
 @ParentPackage(value = "struts-learyperi")
 @Action(namespace = "/page/org", name = "org")
-@Results({ @Result(name = "toList", type = ServletRedirectResult.class, value = "/page/org/org!listOrg.action"), @Result(name = "list", type = FreemarkerResult.class, value = "/page/org/orgList.xhtml"),
-        @Result(name = "show", type = FreemarkerResult.class, value = "/page/org/orgDetail.xhtml"), @Result(name = "toNew", type = FreemarkerResult.class, value = "/page/org/orgNew.xhtml"),
-        @Result(name = "toEdit", type = FreemarkerResult.class, value = "/page/org/orgEdit.xhtml") })
+@Results({ @Result(name = "toList", type = ServletRedirectResult.class, value = "/page/org/org!listOrg.action"),
+        @Result(name = "list", type = FreemarkerResult.class, value = "/page/org/orgList.xhtml"), @Result(name = "show", type = FreemarkerResult.class, value = "/page/org/orgDetail.xhtml"),
+        @Result(name = "toNew", type = FreemarkerResult.class, value = "/page/org/orgNew.xhtml"), @Result(name = "toEdit", type = FreemarkerResult.class, value = "/page/org/orgEdit.xhtml") })
 @Scope("request")
 public class OrgAction {
     protected Logger log = LoggerFactory.getLogger(this.getClass());
@@ -95,24 +95,30 @@ public class OrgAction {
     }
 
     /**
+     * 跳转去新建页面
+     * 
+     * @return
+     * @throws Exception
+     */
+    public String toNew() throws Exception {
+        if ("root_org".equals(this.getOrg().getParent().getCode())) {// 如果父节点为根则为创建一级机构
+            OrgProfile root = this.getOrgService().findRoot();
+            this.getOrg().setParent(root);
+        }
+        log.debug("to new org");
+        return "toNew";
+    }
+
+    /**
      * 跳转去编辑页面
      * 
      * @return
      * @throws Exception
      */
     public String toEdit() throws Exception {
-        if (this.getOrg().getId() == null) {// 如果没有机构参数，则属于新增
-            if ("root_org".equals(this.getOrg().getParent().getCode())) {// 如果父节点为根则为创建一级机构
-                OrgProfile root = this.getOrgService().findRoot();
-                this.getOrg().setParent(root);
-            }
-            log.debug("to new org");
-            return "toNew";
-        } else {// 修改机构信息，首先取得机构信息。
-            this.setOrg(this.getOrgService().findOrg(this.getOrg().getId()));
-            log.debug("to edit org");
-            return "toEdit";
-        }
+        this.setOrg(this.getOrgService().findOrg(this.getOrg().getId()));
+        log.debug("to edit org");
+        return "toEdit";
     }
 
     public OrgProfile getOrg() {

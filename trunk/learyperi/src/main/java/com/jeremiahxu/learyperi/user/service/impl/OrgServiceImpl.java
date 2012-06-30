@@ -59,7 +59,7 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public OrgProfile findRoot() {
-        List<OrgProfile> rs = this.getOrgDao().queryByJPQL("select o from OrgProfile o where o.code='root_org' and o.level=0");
+        List<OrgProfile> rs = this.getOrgDao().query("select o from OrgProfile o where o.code='root_org' and o.level=0");
         if (rs.size() == 1) {
             return rs.get(0);
         } else {

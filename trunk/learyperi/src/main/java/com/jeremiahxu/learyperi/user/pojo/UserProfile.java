@@ -38,10 +38,10 @@ public class UserProfile implements Serializable {
     private String firstName;// 用户的名字
     @Column(name = "USI_LAST_NAME", length = 50, nullable = false)
     private String lastName;// 用户的姓
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH }, targetEntity = RoleProfile.class)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REFRESH }, targetEntity = RoleProfile.class)
     @JoinTable(name = "T_USER_ROLE_REL", joinColumns = { @JoinColumn(name = "USI_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROI_ID") })
     private Set<RoleProfile> roles;// 用户所属的角色列表
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REFRESH })
     @JoinColumn(name = "OGI_ID")
     private OrgProfile org;// 用户所属组织机构
 
