@@ -1,0 +1,4 @@
+1. 默认调试数据库为MySQL，使用/src/env/目录下的create.sql来创建数据库。
+2. 默认调试工具为Jetty，正确启动后，访问URL：http://localhost:8080/learyperi/page/config/setup!toSetup.action
+   点击“init data”按钮，初始化数据。初始化数据成功后会提示“数据初始化成功!”。
+3. 访问http://localhost:8080/learyperi,正确的话应该进入登录页面，默认用户名为admin,密码为learyperi
